@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.junit.Test;
 
-public class CollectionsUtilTest {
+public class ListUtilTest {
 
     @Test
     public void testSplitList() {
