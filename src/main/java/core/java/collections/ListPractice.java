@@ -3,7 +3,7 @@ package core.java.collections;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ListUtil {
+public class ListPractice {
 
     /**
      * Method to split list into sub lists of required size
