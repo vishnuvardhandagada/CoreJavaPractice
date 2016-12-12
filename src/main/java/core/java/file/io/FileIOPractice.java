@@ -44,7 +44,7 @@ public class FileIOPractice {
 	File file1 = new File(filePath1);
 	System.out.println("file1: " + file1);
 
-	String filePath2 = "E:/Backup/JavaPrep/practiceProjects/CoreJavaPractice/src/main/java/core/java/file/io/file1.txt";
+	String filePath2 = "E:\\Backup\\JavaPrep\\practiceProjects\\CoreJavaPractice\\src\\main\\resources\\file1.txt";
 	File file2 = new File(filePath2);
 	System.out.println("file2: " + file2);
     }
@@ -55,7 +55,7 @@ public class FileIOPractice {
     @Ignore
     @Test
     public void readFileWithRelativePath() throws IOException {
-	URL url = getClass().getResource("file1.txt");
+	URL url = getClass().getClassLoader().getResource("file1.txt");
 	File file = new File(url.getPath());
 	System.out.println("readFileWithRelativePath() -> file.getAbsolutePath(): " + file.getAbsolutePath());
 
@@ -68,7 +68,7 @@ public class FileIOPractice {
 	}
 
 	System.out.println("-----------------method 2 - reading content--------------------------");
-	try (InputStream inputStream = getClass().getResourceAsStream("file1.txt");
+	try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream("file1.txt");
 		BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream))) {
 	    String line = "";
 	    while ((line = bufferedReader.readLine()) != null) {
@@ -84,18 +84,18 @@ public class FileIOPractice {
     @Ignore
     @Test
     public void convertFileToInputstream() throws IOException {
-	String filePath1 = "E:/Backup/JavaPrep/practiceProjects/CoreJavaPractice/src/main/java/core/java/file/io/file1.txt";
+	String filePath1 = "E:\\Backup\\JavaPrep\\practiceProjects\\CoreJavaPractice\\src\\main\\resources\\file1.txt";
 	File file = new File(filePath1);
 	InputStream inputStream1 = new FileInputStream(file);
 	System.out.println("inputStream1: " + inputStream1 + ", number of bytes:" + inputStream1.available());
 	inputStream1.close();
 
-	InputStream inputStream2 = getClass().getResourceAsStream("file1.txt");
+	InputStream inputStream2 = getClass().getClassLoader().getResourceAsStream("file1.txt");
 	System.out.println("inputStream2: " + inputStream2 + ", number of bytes:" + inputStream2.available());
 	inputStream2.close();
 
 	// from java 7 
-	try (InputStream inputStream3 = getClass().getResourceAsStream("file1.txt")) {
+	try (InputStream inputStream3 = getClass().getClassLoader().getResourceAsStream("file1.txt")) {
 	    System.out.println("inputStream3: " + inputStream3 + ", number of bytes:" + inputStream3.available());
 	}
     }
@@ -109,7 +109,7 @@ public class FileIOPractice {
     @Test
     public void readContentsOfFile() throws FileNotFoundException, IOException {
 	System.out.println("-------------method 1 using java.io.BufferedReader with relative path--------------------------");
-	URL url = getClass().getResource("file1.txt");
+	URL url = getClass().getClassLoader().getResource("file1.txt");
 	File file = new File(url.getPath());
 	System.out.println("readContentsOfFile() -> file.getAbsolutePath(): " + file.getAbsolutePath());
 	try (BufferedReader bufferedReader = new BufferedReader(new FileReader(file));) {
@@ -121,7 +121,7 @@ public class FileIOPractice {
 
 	System.out.println("----------------method 2 java.io.BufferedReader with absolute path-----------------------");
 	try (BufferedReader bufferedReader = new BufferedReader(new FileReader(
-		"E:\\Backup\\JavaPrep\\practiceProjects\\CoreJavaPractice\\src\\main\\java\\core\\java\\file\\io\\file1.txt"))) {
+		"E:\\Backup\\JavaPrep\\practiceProjects\\CoreJavaPractice\\src\\main\\resources\\file1.txt"))) {
 	    String line = "";
 	    while ((line = bufferedReader.readLine()) != null) {
 		System.out.println(line);
@@ -129,7 +129,7 @@ public class FileIOPractice {
 	}
 
 	System.out.println("-----------------method 3 read file using java.util.Scanner----------------------");
-	URL url2 = getClass().getResource("file1.txt");
+	URL url2 = getClass().getClassLoader().getResource("file1.txt");
 	File file2 = new File(url2.getPath());
 	System.out.println("readContentsOfFile() -> file2.getAbsolutePath(): " + file2.getAbsolutePath());
 	try (Scanner scanner = new Scanner(file)) {
@@ -139,7 +139,7 @@ public class FileIOPractice {
 	}
 
 	System.out.println("----------method 4 - read file using java.io.InputStream --------------");
-	File file3 = new File(getClass().getResource("file1.txt").getPath());
+	File file3 = new File(getClass().getClassLoader().getResource("file1.txt").getPath());
 	try (InputStream inputStream = new FileInputStream(file3);
 		BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));) {
 	    StringBuffer stringBuffer = new StringBuffer();
@@ -150,6 +150,30 @@ public class FileIOPractice {
 	    System.out.println("stringBuffer: " + stringBuffer);
 	} catch (IOException e) {
 	    e.printStackTrace();
+	}
+    }
+
+    //    @Ignore
+    @Test
+    public void deleteFile() {
+	URL url = getClass().getClassLoader().getResource("file2.txt");
+	File file = new File(url.getPath());
+	File parentDirectory = new File(file.getParent());
+
+	// before file delete
+	System.out.println("--- before delete-----");
+	String[] filesList = parentDirectory.list();
+	for (String fileName : filesList) {
+	    System.out.println("fileName: " + fileName);
+	}
+
+	file.delete();
+
+	//after file delete
+	System.out.println("--- after delete-----");
+	filesList = parentDirectory.list();
+	for (String fileName : filesList) {
+	    System.out.println("fileName: " + fileName);
 	}
     }
 }
