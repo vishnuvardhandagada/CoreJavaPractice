@@ -17,8 +17,14 @@ import org.junit.Test;
 public class FileIOPractice {
 
     public static void main(String[] args) {
-	FileIOPractice fileUtil = new FileIOPractice();
-	fileUtil.listFilesAndDirectories(new File("E:/Backup/JavaPrep/practiceProjects/images"));
+	/*FileIOPractice fileUtil = new FileIOPractice();
+	fileUtil.listFilesAndDirectories(new File("E:/Backup/JavaPrep/practiceProjects/images"));*/
+
+	try {
+	    readFileWithRelativePathFromStaticMethod();
+	} catch (IOException e) {
+	    e.printStackTrace();
+	}
     }
 
     /**
@@ -75,6 +81,36 @@ public class FileIOPractice {
 		System.out.println(line);
 	    }
 	}
+    }
+
+    /**
+     * Read file with relative path from static method
+     * @throws FileNotFoundException
+     * @throws IOException
+     */
+    public static void readFileWithRelativePathFromStaticMethod() throws FileNotFoundException, IOException {
+
+	URL url = FileIOPractice.class.getClassLoader().getResource("file1.txt");
+	File file = new File(url.getPath());
+	System.out.println("readFileWithRelativePathFromStaticMethod() -> file.getAbsolutePath(): " + file.getAbsolutePath());
+
+	System.out.println("-----------------method 1 - reading content--------------------------");
+	try (BufferedReader bufferedReader = new BufferedReader(new FileReader(file));) {
+	    String line = "";
+	    while ((line = bufferedReader.readLine()) != null) {
+		System.out.println(line);
+	    }
+	}
+
+	System.out.println("-----------------method 2 - reading content--------------------------");
+	try (InputStream inputStream = FileIOPractice.class.getClassLoader().getResourceAsStream("file1.txt");
+		BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream))) {
+	    String line = "";
+	    while ((line = bufferedReader.readLine()) != null) {
+		System.out.println(line);
+	    }
+	}
+
     }
 
     /**
@@ -153,7 +189,7 @@ public class FileIOPractice {
 	}
     }
 
-    //    @Ignore
+    @Ignore
     @Test
     public void deleteFile() {
 	URL url = getClass().getClassLoader().getResource("file2.txt");
