@@ -4,11 +4,15 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.net.URL;
+import java.nio.channels.FileChannel;
+import java.nio.file.Files;
 import java.util.Scanner;
 
 import org.junit.Ignore;
@@ -211,5 +215,46 @@ public class FileIOPractice {
 	for (String fileName : filesList) {
 	    System.out.println("fileName: " + fileName);
 	}
+    }
+
+    //    @Ignore
+    @Test
+    public void copyFile() throws IOException {
+	// method 1
+	System.out.println("------ using java.io.InputStream ------------");
+	File outputFile = new File("E:\\Backup\\JavaPrep\\practiceProjects\\CoreJavaPractice\\src\\main\\resources\\file1-copy1.txt");
+	byte[] buffer = new byte[1024];
+	int length = 0;
+
+	try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream("file1.txt");
+		OutputStream outputStream = new FileOutputStream(outputFile);) {
+	    while ((length = inputStream.read(buffer)) > 0) {
+		outputStream.write(buffer, 0, length);
+	    }
+	}
+	System.out.println("java.io.InputStream -> file copied");
+
+	// method 2
+	System.out.println("--------using java.nio.channels.FileChannel ----------");
+	URL url = getClass().getClassLoader().getResource("file1.txt");
+	File source = new File(url.getPath());
+	File destination = new File("E:\\Backup\\JavaPrep\\practiceProjects\\CoreJavaPractice\\src\\main\\resources\\file1-copy2.txt");
+
+	try (FileInputStream sourceInputStream = new FileInputStream(source);
+		FileChannel sourceChannel = sourceInputStream.getChannel();
+		FileOutputStream destOutputStream = new FileOutputStream(destination);
+		FileChannel destChannel = destOutputStream.getChannel();) {
+	    destChannel.transferFrom(sourceChannel, 0, sourceChannel.size());
+	}
+
+	System.out.println("java.nio.channels.FileChannel -> file copied");
+
+	// method 3 - from java 7
+	System.out.println("----- using java.nio.file.Files ----------");
+	URL url2 = getClass().getClassLoader().getResource("file1.txt");
+	File source2 = new File(url2.getPath());
+	File destination2 = new File("E:\\Backup\\JavaPrep\\practiceProjects\\CoreJavaPractice\\src\\main\\resources\\file1-copy3.txt");
+	Files.copy(source2.toPath(), destination2.toPath());
+	System.out.println("java.nio.file.Files -> file copied");
     }
 }
