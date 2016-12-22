@@ -2,6 +2,7 @@ package core.java.collections;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -54,6 +55,9 @@ public class ListPractice {
 
     }
 
+    /**
+     * Method to convert list to array
+     */
     @Ignore
     @Test
     public void convertListToArray() {
@@ -67,5 +71,29 @@ public class ListPractice {
 	for (String value : list1Array) {
 	    System.out.print(value + ",");
 	}
+    }
+
+    //    @Ignore
+    @Test
+    public void convertListToCommaSeparatedString() {
+	List<String> list = Arrays.asList("A", "B", "C", "D", "E");
+
+	//method 1
+	StringBuffer listToString1 = new StringBuffer(list.toString());
+	listToString1.deleteCharAt(0);
+	listToString1.deleteCharAt(listToString1.length() - 1);
+	String destString = listToString1.toString().replace(" ", "");
+	System.out.println("listToString1: " + destString);
+
+	// method 2
+	Iterator<String> iterator = list.iterator();
+	StringBuffer listToString2 = new StringBuffer();
+	for (;;) {
+	    listToString2.append(iterator.next());
+	    if (!iterator.hasNext())
+		break;
+	    listToString2.append(",");
+	}
+	System.out.println("listToString2: " + listToString2);
     }
 }

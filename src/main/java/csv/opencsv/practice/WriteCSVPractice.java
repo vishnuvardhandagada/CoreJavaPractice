@@ -1,4 +1,4 @@
-package csv.practice.opencsv;
+package csv.opencsv.practice;
 
 import java.io.FileWriter;
 import java.io.IOException;

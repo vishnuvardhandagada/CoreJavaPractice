@@ -1,4 +1,4 @@
-package csv.practice.opencsv;
+package csv.opencsv.practice;
 
 import java.io.File;
 import java.io.FileNotFoundException;
