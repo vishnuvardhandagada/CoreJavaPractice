@@ -1,17 +1,20 @@
 package core.java.file.io;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.URL;
 import java.nio.channels.FileChannel;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.util.Scanner;
 
@@ -217,7 +220,7 @@ public class FileIOPractice {
 	}
     }
 
-    //    @Ignore
+    @Ignore
     @Test
     public void copyFile() throws IOException {
 	// method 1
@@ -256,5 +259,29 @@ public class FileIOPractice {
 	File destination2 = new File("E:\\Backup\\JavaPrep\\practiceProjects\\CoreJavaPractice\\src\\main\\resources\\file1-copy3.txt");
 	Files.copy(source2.toPath(), destination2.toPath());
 	System.out.println("java.nio.file.Files -> file copied");
+    }
+
+    @Ignore
+    @Test
+    public void createFile() throws IOException {
+	File file1 = new File("E:\\Backup\\JavaPrep\\practiceProjects\\CoreJavaPractice\\src\\main\\resources\\new-file.txt");
+	boolean isFile1Created = file1.createNewFile();
+	System.out.println("isFile1Created: " + isFile1Created);
+	System.out.println("FileIOPractice -> createFile() -> writing file1 using BufferedWriter");
+	try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file1));) {
+	    bufferedWriter.write("Hello new-file.txt");
+	}
+
+	File file2 = new File("E:\\Backup\\JavaPrep\\practiceProjects\\CoreJavaPractice\\src\\main\\resources\\new-file2.txt");
+	boolean isFile2Created = file2.createNewFile();
+	System.out.println("isFile2Created: " + isFile2Created);
+	System.out.println("FileIOPractice -> createFile() -> writing file2 using OutputStream");
+	String fileData = "New file created. Let's write some data";
+	byte[] fileDataAsByteArray = fileData.getBytes(StandardCharsets.UTF_8);
+	try (OutputStream outputStream = new FileOutputStream(file2);) {
+	    outputStream.write(fileDataAsByteArray, 0, fileDataAsByteArray.length);
+	}
+
+	System.out.println("files creation completed");
     }
 }
