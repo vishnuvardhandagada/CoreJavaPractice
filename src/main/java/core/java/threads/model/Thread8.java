@@ -1,27 +1,26 @@
 package core.java.threads.model;
 
 /**
- * Thread for non static synchronized practice
+ * Thread to call method with synchronized block
  * @author Avinash Babu Donthu
  *
  */
-public class Thread3 implements Runnable {
+public class Thread8 extends Thread {
 
     private Counter counter;
 
-    public Thread3(Counter counter) {
+    public Thread8(Counter counter) {
 	this.counter = counter;
     }
 
     @Override
     public void run() {
 	for (int i = 0; i < 1000; i++) {
-	    counter.increment1();
+	    counter.increment5();
 	}
 
 	for (int i = 0; i < 1000; i++) {
-	    counter.increment2();
+	    counter.increment6();
 	}
     }
-
 }

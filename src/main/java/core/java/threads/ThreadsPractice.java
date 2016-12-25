@@ -10,6 +10,8 @@ import core.java.threads.model.Thread3;
 import core.java.threads.model.Thread4;
 import core.java.threads.model.Thread5;
 import core.java.threads.model.Thread6;
+import core.java.threads.model.Thread7;
+import core.java.threads.model.Thread8;
 
 /**
  * Thread practice class
@@ -87,7 +89,7 @@ public class ThreadsPractice {
      * <a href="http://tutorials.jenkov.com/java-concurrency/race-conditions-and-critical-sections.html" target="_blank">Reference</a>
      * @throws InterruptedException
      */
-    //    @Ignore
+    @Ignore
     @Test
     public void raceConditionCriticalSectionProblem() throws InterruptedException {
 	Counter counter = new Counter();
@@ -106,5 +108,64 @@ public class ThreadsPractice {
 
 	System.out.println(counter.getCount1());
 	System.out.println(counter.getCount2());
+    }
+
+    /**
+     * synchronized static method<br>
+     * Synchronized static methods are synchronized on the class object of the class the synchronized static method belongs to.<br>
+     * Since only one class object exists in the Java VM per class, only one thread can execute inside a static synchronized method in the same class.<br>
+     * If the static synchronized methods are located in different classes, 
+     * then one thread can execute inside the static synchronized methods of each class. <br>
+     * One thread per class regardless of which static synchronized method it calls<br><br>
+     * @throws InterruptedException
+     */
+    @Ignore
+    @Test
+    public void synchronizedStaticMethod() throws InterruptedException {
+	Thread thread1 = new Thread7();
+	Thread thread2 = new Thread7();
+	Thread thread3 = new Thread7();
+
+	thread1.start();
+	thread2.start();
+	thread3.start();
+
+	thread1.join();
+	thread2.join();
+	thread3.join();
+
+	System.out.println(Counter.getCount4());
+	System.out.println(Counter.getCount4());
+    }
+
+    /**
+     * Calling method with synchronized block<br>
+     * The Java synchronized block construct takes an object in parentheses.<br>
+     * In the example "this" is used, which is the instance the add method is called on.<br>
+     * The object taken in the parentheses by the synchronized construct is called a monitor object.<br>
+     * The code is said to be synchronized on the monitor object.<br>
+     * A synchronized instance method uses the object it belongs to as monitor object<br>
+     * Only one thread can execute inside a Java code block synchronized on the same monitor object.<br><br>
+     * @throws InterruptedException
+     */
+    @Ignore
+    @Test
+    public void synchronizedBlock() throws InterruptedException {
+	Counter counter = new Counter();
+
+	Thread thread1 = new Thread8(counter);
+	Thread thread2 = new Thread8(counter);
+	Thread thread3 = new Thread8(counter);
+
+	thread1.start();
+	thread2.start();
+	thread3.start();
+
+	thread1.join();
+	thread2.join();
+	thread3.join();
+
+	System.out.println(counter.getCount5());
+	System.out.println(counter.getCount6());
     }
 }
