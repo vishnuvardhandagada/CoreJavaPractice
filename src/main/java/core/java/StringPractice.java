@@ -7,6 +7,11 @@ import java.util.Arrays;
 import org.junit.Ignore;
 import org.junit.Test;
 
+/**
+ * @see String class practice
+ * @author Avinash Babu Donthu
+ *
+ */
 public class StringPractice {
 
     /**
@@ -43,4 +48,5 @@ public class StringPractice {
 	byte[] strByteArray = str.getBytes();
 	System.out.println("asciValues: " + Arrays.toString(strByteArray));
     }
+
 }
