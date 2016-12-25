@@ -16,7 +16,10 @@ import java.net.URL;
 import java.nio.channels.FileChannel;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.util.Enumeration;
 import java.util.Scanner;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipFile;
 
 import org.junit.Ignore;
 import org.junit.Test;
@@ -188,7 +191,7 @@ public class FileIOPractice {
 	    StringBuffer stringBuffer = new StringBuffer();
 	    String line;
 	    while ((line = bufferedReader.readLine()) != null) {
-		stringBuffer.append(line + "\n");
+		stringBuffer.append(line).append("\n");
 	    }
 	    System.out.println("stringBuffer: " + stringBuffer);
 	} catch (IOException e) {
@@ -283,5 +286,58 @@ public class FileIOPractice {
 	}
 
 	System.out.println("files creation completed");
+    }
+
+    /**
+     * Reading Zip file
+     * @throws IOException 
+     */
+    @Ignore
+    @Test
+    public void readZipFile() throws IOException {
+	URL url = getClass().getClassLoader().getResource("my-zip-file.zip");
+	try (ZipFile zipFile = new ZipFile(url.getPath());) {
+
+	    // reading all files in a zip file
+	    Enumeration<? extends ZipEntry> zipEntries = zipFile.entries();
+	    while (zipEntries.hasMoreElements()) {
+		ZipEntry zipEntry = zipEntries.nextElement();
+		if (zipEntry.isDirectory()) {
+		    System.out.println("Dir -> " + zipEntry.getName());
+		} else {
+		    System.out.println("File -> " + zipEntry.getName());
+		}
+	    }
+
+	    System.out.println("-----------------------------------------");
+
+	    // getting specific file in zip file
+	    ZipEntry file1Entry = zipFile.getEntry("my-zip-file/file1.txt");
+	    InputStream file1InputStream = zipFile.getInputStream(file1Entry);
+	    try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(file1InputStream));) {
+		StringBuffer content = new StringBuffer();
+		String line;
+		while ((line = bufferedReader.readLine()) != null) {
+		    content.append(line).append("\n");
+		}
+		System.out.println("file1 content: " + content);
+	    }
+
+	    System.out.println("-----------------------------------------");
+
+	    // getting specific file in sub-folder in zip file
+	    ZipEntry file4Entry = zipFile.getEntry("my-zip-file/sub-folder/file4.txt");
+	    InputStream file4InputStream = zipFile.getInputStream(file4Entry);
+	    try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(file4InputStream));) {
+		StringBuffer content = new StringBuffer();
+		String line;
+		while ((line = bufferedReader.readLine()) != null) {
+		    content.append(line).append("\n");
+		}
+		System.out.println("file4 content: " + content);
+	    }
+
+	}
+
     }
 }
