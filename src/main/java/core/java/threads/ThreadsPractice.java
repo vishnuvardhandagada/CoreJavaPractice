@@ -12,6 +12,7 @@ import core.java.threads.model.Thread5;
 import core.java.threads.model.Thread6;
 import core.java.threads.model.Thread7;
 import core.java.threads.model.Thread8;
+import core.java.threads.model.Thread9;
 
 /**
  * Thread practice class
@@ -167,5 +168,27 @@ public class ThreadsPractice {
 
 	System.out.println(counter.getCount5());
 	System.out.println(counter.getCount6());
+    }
+
+    /**
+     * @throws InterruptedException 
+     * @see ThreadLocal practice
+     */
+    //    @Ignore
+    @Test
+    public void threadLocal() throws InterruptedException {
+	Thread thread1 = new Thread9(1, "Thread1");
+	Thread thread2 = new Thread9(2, "Thread2");
+	Thread thread3 = new Thread9(3, "Thread3");
+
+	thread1.start();
+	thread2.start();
+	thread3.start();
+
+	thread1.join();
+	thread2.join();
+	thread3.join();
+
+	System.out.println("ThreadsPractice -> threadLocal()");
     }
 }
