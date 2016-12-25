@@ -171,10 +171,16 @@ public class ReadJSON {
 	}
     }
 
+    /**
+     * Method to convert JSON String to java.util.Map
+     * @throws JsonParseException
+     * @throws JsonMappingException
+     * @throws IOException
+     */
     @SuppressWarnings("unchecked")
     @Ignore
     @Test
-    public void covertJSONToMap() throws JsonParseException, JsonMappingException, IOException {
+    public void covertJSONStringToMap() throws JsonParseException, JsonMappingException, IOException {
 	ObjectMapper objectMapper = new ObjectMapper();
 	String json = "{\"brand\":\"mercede\",\"doors\": \"4\"}";
 
@@ -186,8 +192,14 @@ public class ReadJSON {
 	System.out.println("covertJSONToMap() -> map2: " + map2);
     }
 
+    /**
+     * Method to read JSON from file and convert that JSON to java.util.Map
+     * @throws JsonParseException
+     * @throws JsonMappingException
+     * @throws IOException
+     */
     @SuppressWarnings("unchecked")
-    //    @Ignore
+    @Ignore
     @Test
     public void convertJsonFileToMap() throws JsonParseException, JsonMappingException, IOException {
 	File file = new File("E:\\Backup\\JavaPrep\\practiceProjects\\CoreJavaPractice\\src\\main\\java\\json\\jackson\\practice\\car4.json");
