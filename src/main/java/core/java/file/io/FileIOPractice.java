@@ -16,6 +16,7 @@ import java.net.URL;
 import java.nio.channels.FileChannel;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Enumeration;
 import java.util.Scanner;
 import java.util.zip.ZipEntry;
@@ -339,5 +340,35 @@ public class FileIOPractice {
 
 	}
 
+    }
+
+    /**
+     * Method to get current project directory
+     */
+    @Ignore
+    @Test
+    public void getCurrentProjectDirectory() {
+	// method 1
+	String projectDirectory1 = System.getProperty("user.dir");
+	System.out.println("FileIOPractice -> getCurrentDirectory() -> projectDirectory1: " + projectDirectory1);
+
+	// method 2
+	String projectDirectory2 = Paths.get("").toAbsolutePath().toString();
+	System.out.println("FileIOPractice -> getCurrentDirectory() -> projectDirectory2: " + projectDirectory2);
+
+	// method 3
+	String projectDirectory3 = Paths.get(".").toAbsolutePath().normalize().toString();
+	System.out.println("FileIOPractice -> getCurrentDirectory() -> projectDirectory3: " + projectDirectory3);
+
+	// method 4
+	URL projectDirectory4 = getClass().getProtectionDomain().getCodeSource().getLocation();
+	System.out.println("FileIOPractice -> getCurrentDirectory() -> projectDirectory4: " + projectDirectory4);
+
+	// method 5
+	String myCurrentDir = System.getProperty("user.dir")
+		+ File.separator
+		+ System.getProperty("sun.java.command").substring(0, System.getProperty("sun.java.command").lastIndexOf("."))
+			.replace(".", File.separator);
+	System.out.println("FileIOPractice -> getCurrentDirectory() -> myCurrentDir: " + myCurrentDir);
     }
 }
