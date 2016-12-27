@@ -11,6 +11,17 @@ import org.junit.Test;
 
 public class ListPractice {
 
+    public static void main(String[] args) {
+	ListPractice listPractice = new ListPractice();
+	List<Integer> srcList = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+	System.out.println(listPractice.splitList(srcList, 2));
+	System.out.println(listPractice.splitList(srcList, 3));
+	System.out.println(listPractice.splitList(srcList, 4));
+	System.out.println(listPractice.splitList(srcList, 5));
+	System.out.println(listPractice.splitList(srcList, 10));
+	System.out.println(listPractice.splitList(srcList, 15));
+    }
+
     /**
      * Method to split list into sub lists of required size
      * 
