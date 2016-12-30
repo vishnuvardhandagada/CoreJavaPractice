@@ -9,7 +9,7 @@ import core.java.java8.interfaces.FunctionalInterface3;
 
 public class LambdaExpressionPractice {
 
-    //    @Ignore
+    @Ignore
     @Test
     public void functionalInterface1() {
 	FunctionalInterface1 functionalInterface1 = () -> {

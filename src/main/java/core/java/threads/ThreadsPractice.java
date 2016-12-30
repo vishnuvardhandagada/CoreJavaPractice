@@ -53,6 +53,18 @@ public class ThreadsPractice {
     }
 
     /**
+     * Set name to threads
+     */
+    @Ignore
+    @Test
+    public void threadNames2() {
+	for (int i = 0; i < 10; i++) {
+	    Thread thread = new Thread4("Thread" + i);
+	    thread.start();
+	}
+    }
+
+    /**
      * Getting currently executing thread info
      */
     @Ignore
@@ -60,6 +72,19 @@ public class ThreadsPractice {
     public void currentThread() {
 	Thread thread = new Thread5("My Thread5");
 	thread.start();
+
+    }
+
+    /**
+     * Getting currently executing thread info
+     */
+    @Ignore
+    @Test
+    public void currentThread2() {
+	for (int i = 0; i < 10; i++) {
+	    Thread thread = new Thread5("Thread" + i);
+	    thread.start();
+	}
     }
 
     /**
@@ -69,6 +94,7 @@ public class ThreadsPractice {
     @Test
     public void threadClassMethods() {
 	Thread thread = new Thread6("My Thread6");
+	//	thread.setDaemon(true);
 	thread.start();
     }
 
@@ -90,7 +116,7 @@ public class ThreadsPractice {
      * <a href="http://tutorials.jenkov.com/java-concurrency/race-conditions-and-critical-sections.html" target="_blank">Reference</a>
      * @throws InterruptedException
      */
-    @Ignore
+    //    @Ignore
     @Test
     public void raceConditionCriticalSectionProblem() throws InterruptedException {
 	Counter counter = new Counter();
@@ -174,7 +200,7 @@ public class ThreadsPractice {
      * @throws InterruptedException 
      * @see ThreadLocal practice
      */
-    //    @Ignore
+    @Ignore
     @Test
     public void threadLocal() throws InterruptedException {
 	Thread thread1 = new Thread9(1, "Thread1");
