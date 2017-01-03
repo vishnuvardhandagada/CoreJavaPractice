@@ -84,7 +84,10 @@ public class ListPractice {
 	}
     }
 
-    //    @Ignore
+    /**
+     * Method to prepare comma separated String from List values
+     */
+    @Ignore
     @Test
     public void convertListToCommaSeparatedString() {
 	List<String> list = Arrays.asList("A", "B", "C", "D", "E");
@@ -106,5 +109,16 @@ public class ListPractice {
 	    listToString2.append(",");
 	}
 	System.out.println("listToString2: " + listToString2);
+
+	// method 3
+	StringBuffer listToString3 = new StringBuffer("[");
+	for (Iterator<String> iterator2 = list.iterator(); iterator2.hasNext();) {
+	    listToString3.append(iterator2.next());
+	    if (iterator2.hasNext()) {
+		listToString3.append(",");
+	    }
+	}
+	listToString3.append("]");
+	System.out.println("listToString3: " + listToString3.toString());
     }
 }
