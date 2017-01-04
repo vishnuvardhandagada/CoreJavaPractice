@@ -1,10 +1,23 @@
 package core.java.threads;
 
+import java.time.Clock;
+import java.time.Duration;
+import java.time.LocalTime;
+
 import org.junit.Ignore;
 import org.junit.Test;
 
 import core.java.threads.model.Counter;
+import core.java.threads.model.SynchronizedMethodProblem;
+import core.java.threads.model.SynchronizedMethodProblemSolution1;
+import core.java.threads.model.SynchronizedMethodProblemSolution2;
 import core.java.threads.model.Thread1;
+import core.java.threads.model.Thread10;
+import core.java.threads.model.Thread11;
+import core.java.threads.model.Thread12;
+import core.java.threads.model.Thread13;
+import core.java.threads.model.Thread14;
+import core.java.threads.model.Thread15;
 import core.java.threads.model.Thread2;
 import core.java.threads.model.Thread3;
 import core.java.threads.model.Thread4;
@@ -35,11 +48,24 @@ public class ThreadsPractice {
 	Thread thread2 = new Thread(new Thread2());
 	thread2.start();
 
-	// method 3 - from java 8 using Lambda expressions
-	Thread thread3 = new Thread(() -> {
-	    System.out.println("Thread implementation using Labmda expression from Java 8");
+	// method 3 - using anonymous inner class
+	Thread thread3 = new Thread(new Runnable() {
+	    @Override
+	    public void run() {
+		for (int i = 20; i < 30; i++) {
+		    System.out.println("Anonymous inner class: " + i);
+		}
+	    }
 	});
 	thread3.start();
+
+	// method 3 - from java 8 using Lambda expressions
+	Thread thread4 = new Thread(() -> {
+	    for (int i = 30; i < 40; i++) {
+		System.out.println("Java 8 -> Labmda expression: " + i);
+	    }
+	});
+	thread4.start();
     }
 
     /**
@@ -116,7 +142,7 @@ public class ThreadsPractice {
      * <a href="http://tutorials.jenkov.com/java-concurrency/race-conditions-and-critical-sections.html" target="_blank">Reference</a>
      * @throws InterruptedException
      */
-    //    @Ignore
+    @Ignore
     @Test
     public void raceConditionCriticalSectionProblem() throws InterruptedException {
 	Counter counter = new Counter();
@@ -194,6 +220,83 @@ public class ThreadsPractice {
 
 	System.out.println(counter.getCount5());
 	System.out.println(counter.getCount6());
+    }
+
+    /**
+     * 1. Two threads are operating on 2 separate variables in a common object in 2 different methods.
+     * 2.  If we declare both methods synchronized then 2 threads will execute in a sequence instead of parallel
+     * @throws InterruptedException 
+     */
+    @Ignore
+    @Test
+    public void synchronizedMethodProblem() throws InterruptedException {
+	SynchronizedMethodProblem synchronizedMethodProblem = new SynchronizedMethodProblem();
+	Thread threadA = new Thread10(synchronizedMethodProblem);
+	Thread threadB = new Thread11(synchronizedMethodProblem);
+
+	LocalTime startTime = LocalTime.now(Clock.systemDefaultZone());
+
+	threadA.start();
+	threadB.start();
+
+	threadA.join();
+	threadB.join();
+
+	LocalTime endTime = LocalTime.now(Clock.systemDefaultZone());
+
+	System.out.println("duration: " + Duration.between(startTime, endTime).getSeconds());
+	System.out.println("list1.size(): " + synchronizedMethodProblem.getList1().size() + ", list2.size(): "
+		+ synchronizedMethodProblem.getList2().size());
+    }
+
+    /**
+     * To solve above problem we need to get two separate locks for 2 methods
+     */
+    @Ignore
+    @Test
+    public void synchronizedMethodProblemSolution1() throws InterruptedException {
+	SynchronizedMethodProblemSolution1 synchronizedMethodProblem = new SynchronizedMethodProblemSolution1();
+	Thread threadA = new Thread12(synchronizedMethodProblem);
+	Thread threadB = new Thread13(synchronizedMethodProblem);
+
+	LocalTime startTime = LocalTime.now(Clock.systemDefaultZone());
+
+	threadA.start();
+	threadB.start();
+
+	threadA.join();
+	threadB.join();
+
+	LocalTime endTime = LocalTime.now(Clock.systemDefaultZone());
+
+	System.out.println("duration: " + Duration.between(startTime, endTime).getSeconds());
+	System.out.println("list1.size(): " + synchronizedMethodProblem.getList1().size() + ", list2.size(): "
+		+ synchronizedMethodProblem.getList2().size());
+    }
+
+    /**
+     * To solve above problem we need to get two separate locks for 2 methods
+     */
+    //    @Ignore
+    @Test
+    public void synchronizedMethodProblemSolution2() throws InterruptedException {
+	SynchronizedMethodProblemSolution2 synchronizedMethodProblem = new SynchronizedMethodProblemSolution2();
+	Thread threadA = new Thread14(synchronizedMethodProblem);
+	Thread threadB = new Thread15(synchronizedMethodProblem);
+
+	LocalTime startTime = LocalTime.now(Clock.systemDefaultZone());
+
+	threadA.start();
+	threadB.start();
+
+	threadA.join();
+	threadB.join();
+
+	LocalTime endTime = LocalTime.now(Clock.systemDefaultZone());
+
+	System.out.println("duration: " + Duration.between(startTime, endTime).getSeconds());
+	System.out.println("list1.size(): " + synchronizedMethodProblem.getList1().size() + ", list2.size(): "
+		+ synchronizedMethodProblem.getList2().size());
     }
 
     /**

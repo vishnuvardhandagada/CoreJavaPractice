@@ -15,11 +15,11 @@ public class Thread3 implements Runnable {
 
     @Override
     public void run() {
-	for (int i = 0; i < 1000; i++) {
+	for (int i = 0; i < 10000; i++) {
 	    counter.increment1();
 	}
 
-	for (int i = 0; i < 1000; i++) {
+	for (int i = 0; i < 10000; i++) {
 	    counter.increment2();
 	}
     }
