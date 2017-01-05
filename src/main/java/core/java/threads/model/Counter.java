@@ -13,6 +13,7 @@ public class Counter {
     private static int count4 = 0;
     private int count5 = 0;
     private int count6 = 0;
+    private volatile int count7 = 0;
 
     /**
      * non-synchronized non static increment method
@@ -56,6 +57,10 @@ public class Counter {
 	synchronized (this) {
 	    count6++;
 	}
+    }
+
+    public void increment7() {
+	count7++;
     }
 
     /**
@@ -103,6 +108,10 @@ public class Counter {
      */
     public int getCount6() {
 	return count6;
+    }
+
+    public int getCount7() {
+	return count7;
     }
 
 }
