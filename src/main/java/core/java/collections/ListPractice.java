@@ -42,12 +42,16 @@ public class ListPractice {
     @Test
     public void convertArrayToList() {
 	String[] stringArray = new String[] { "A", "B", "C", "D" };
+
+	// method 1
 	List<String> stringList = Arrays.asList(stringArray);
 	System.out.println("stringList: " + stringList);
 
+	// method 2
 	List<String> stringList2 = new ArrayList<>(Arrays.asList(stringArray));
 	System.out.println("stringList2: " + stringList2);
 
+	// method 3
 	int[] numbersArray1 = new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
 	List<Integer> numbersList1 = new ArrayList<>();
 	for (int number : numbersArray1) {
@@ -60,6 +64,7 @@ public class ListPractice {
 	List<Integer> numbersList2 = Arrays.stream(numbersArray2).boxed().collect(Collectors.toList());
 	System.out.println("numbersList2: " + numbersList2);
 
+	// method 4
 	Integer[] numbersArray3 = new Integer[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
 	List<Integer> numbersList3 = Arrays.asList(numbersArray3);
 	System.out.println("numbersList3: " + numbersList3);
@@ -80,7 +85,7 @@ public class ListPractice {
 
 	String[] list1Array = list1.toArray(new String[list1.size()]);
 	for (String value : list1Array) {
-	    System.out.print(value + ",");
+	    System.out.println(value);
 	}
     }
 

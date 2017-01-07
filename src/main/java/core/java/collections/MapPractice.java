@@ -150,7 +150,7 @@ public class MapPractice {
     /**
      * Method to check whether key present in the map or not
      */
-    @Ignore
+    //    @Ignore
     @Test
     public void checkIfKeyExistsInMap() {
 	Map<String, String> map = new HashMap<>();

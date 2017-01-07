@@ -4,7 +4,8 @@ public class Thread17 extends Thread {
 
     private WaitNotify waitNotify;
 
-    public Thread17(WaitNotify waitNotify) {
+    public Thread17(String name, WaitNotify waitNotify) {
+	super(name);
 	this.waitNotify = waitNotify;
     }
 

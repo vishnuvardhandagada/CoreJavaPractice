@@ -123,7 +123,6 @@ public class ThreadsPractice {
     public void currentThread() {
 	Thread thread = new Thread5("My Thread5");
 	thread.start();
-
     }
 
     /**
@@ -325,6 +324,26 @@ public class ThreadsPractice {
     }
 
     /**
+     * Thread.sleep(milliSec) practice
+     */
+    @Ignore
+    @Test
+    public void threadSleep() {
+	LocalTime startTime = LocalTime.now(Clock.systemDefaultZone());
+
+	try {
+	    Thread.sleep(1000 * 2);
+	} catch (InterruptedException e) {
+	    e.printStackTrace();
+	}
+
+	LocalTime endTime = LocalTime.now(Clock.systemDefaultZone());
+
+	Duration duration = Duration.between(startTime, endTime);
+	System.out.println("time taken: " + duration.getSeconds());
+    }
+
+    /**
      * @throws InterruptedException 
      * @see ThreadLocal practice
      */
@@ -367,7 +386,7 @@ public class ThreadsPractice {
 	System.out.println("----- All tasks submitted ----");
 
 	// wait until all tasks are completed
-	executorService.awaitTermination(1, TimeUnit.DAYS);
+	executorService.awaitTermination(3, TimeUnit.HOURS);
 
 	System.out.println("---- All tasks completed ---");
     }
@@ -380,8 +399,8 @@ public class ThreadsPractice {
     @Test
     public void waitNotify1() throws InterruptedException {
 	WaitNotify waitNotify = new WaitNotify();
-	Thread t1 = new Thread17(waitNotify);
-	Thread t2 = new Thread18(waitNotify);
+	Thread t1 = new Thread17("thread1", waitNotify);
+	Thread t2 = new Thread18("thread2", waitNotify);
 
 	t1.start();
 	t2.start();
@@ -633,7 +652,7 @@ public class ThreadsPractice {
      * @throws InterruptedException
      * @throws ExecutionException
      */
-    //    @Ignore
+    @Ignore
     @Test
     public void callableFuturesWithException() throws InterruptedException {
 	ExecutorService executorService = Executors.newCachedThreadPool();

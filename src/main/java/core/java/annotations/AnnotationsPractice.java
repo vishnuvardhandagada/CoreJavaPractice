@@ -57,7 +57,7 @@ public class AnnotationsPractice {
 	}
     }
 
-    @Ignore
+    //    @Ignore
     @Test
     public void parameterAnnotations() throws NoSuchMethodException, SecurityException {
 	Class<ClassWithAnnotations> classObject = ClassWithAnnotations.class;

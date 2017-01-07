@@ -209,7 +209,7 @@ public class DatePractice {
 	System.out.println("convertZonedDateTimeToUtilDate() date: " + date);
     }
 
-    @Ignore
+    //    @Ignore
     @Test
     public void convertLocalDateTimeToZonedDateTime() {
 	Clock clock = Clock.systemDefaultZone();
