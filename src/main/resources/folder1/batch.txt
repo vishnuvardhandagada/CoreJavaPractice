@@ -1,0 +1,190 @@
+clean package:
+cd\
+cd "%devPath%"\config
+ant clean package
+--------------------------
+2 api ant:
+cd\
+cd "%devPath%"\api
+ant
+-------------------------
+3 impl ant:
+cd\
+cd "%devPath%"\impl
+ant
+-------------------------
+4 impl ant deploy jboss:
+cd\
+cd "%devPath%"\impl
+ant deploy.jboss
+-------------------------
+5 config ant prepJBoss:
+cd\
+cd "%devPath%"\config
+ant prepJBoss
+-------------------------
+6 config ant:
+cd\
+cd "%devPath%"\config
+ant
+-------------------------
+7 config ant prepMyEclipse:
+cd\
+cd "%devPath%"\config
+ant prepMyEclipse
+--------------------------
+8 config ant refreshdb:
+cd\
+cd "%devPath%"\config
+ant refreshdb
+--------------------------
+9 ant scripts - My Local Machine:
+@echo off
+set batchFilesPath=C:\Users\adonthu\Desktop\One Place\Batch files
+set devPath=C:\Dev\Source\freyatp\freya
+cd\
+@echo -------------------------------------------
+@echo Executing ant clean package
+@echo -------------------------------------------
+call "%batchFilesPath%"\"1 clean package.bat"  devPath
+@echo %errorlevel%
+IF %errorlevel% == 1 GOTO buildFailed
+@echo -------------------------------------------
+@echo Executing api - ant
+@echo -------------------------------------------
+call "%batchFilesPath%"\"2 api ant.bat"  devPath
+IF %errorlevel% == 1 GOTO buildFailed
+@echo -------------------------------------------
+@echo Executing impl - ant
+@echo -------------------------------------------
+call "%batchFilesPath%"\"3 impl ant.bat"  devPath
+IF %errorlevel% == 1 GOTO buildFailed
+@echo -------------------------------------------
+@echo Executing impl - ant deploy.jboss
+@echo -------------------------------------------
+call "%batchFilesPath%"\"4 impl ant deploy jboss.bat"  devPath
+IF %errorlevel% == 1 GOTO buildFailed
+@echo -------------------------------------------
+@echo Executing config - ant prepJBoss
+@echo -------------------------------------------
+call "%batchFilesPath%"\"5 config ant prepJBoss.bat"  devPath
+IF %errorlevel% == 1 GOTO buildFailed
+@echo -------------------------------------------
+@echo Executing config - ant
+@echo -------------------------------------------
+call "%batchFilesPath%"\"6 config ant.bat"  devPath
+IF %errorlevel% == 1 GOTO buildFailed
+@echo -------------------------------------------
+@echo Executing config - ant prepMyEclipse
+@echo -------------------------------------------
+call "%batchFilesPath%"\"7 config ant prepMyEclipse.bat"  devPath
+IF %errorlevel% == 1 GOTO buildFailed
+@echo -------------------------------------------
+@echo Executing config - ant refreshdb
+@echo -------------------------------------------
+call "%batchFilesPath%"\"8 config ant refreshdb.bat"  devPath
+IF %errorlevel% == 1 GOTO buildFailed
+GOTO end
+:buildFailed
+@echo -------------------------------------------
+@echo Build Falied
+@echo -------------------------------------------
+pause
+GOTO exit
+:end
+@echo -------------------------------------------
+@echo All Builds Successfull
+@echo -------------------------------------------
+pause
+:exit
+exit
+---------------------------------------------------------
+10 ant scripts - Common for All:
+@echo off
+set /p batchFilesPath=Enter path of batch files:
+set /p devPath=Enter your dev environment path until freya:
+cd\
+@echo -------------------------------------------
+@echo Executing ant clean package
+@echo -------------------------------------------
+call "%batchFilesPath%"\"1 clean package.bat"  devPath
+@echo %errorlevel%
+IF %errorlevel% == 1 GOTO buildFailed
+@echo -------------------------------------------
+@echo Executing api - ant
+@echo -------------------------------------------
+call "%batchFilesPath%"\"2 api ant.bat"  devPath
+IF %errorlevel% == 1 GOTO buildFailed
+@echo -------------------------------------------
+@echo Executing impl - ant
+@echo -------------------------------------------
+call "%batchFilesPath%"\"3 impl ant.bat"  devPath
+IF %errorlevel% == 1 GOTO buildFailed
+@echo -------------------------------------------
+@echo Executing impl - ant deploy.jboss
+@echo -------------------------------------------
+call "%batchFilesPath%"\"4 impl ant deploy jboss.bat"  devPath
+IF %errorlevel% == 1 GOTO buildFailed
+@echo -------------------------------------------
+@echo Executing config - ant prepJBoss
+@echo -------------------------------------------
+call "%batchFilesPath%"\"5 config ant prepJBoss.bat"  devPath
+IF %errorlevel% == 1 GOTO buildFailed
+@echo -------------------------------------------
+@echo Executing config - ant
+@echo -------------------------------------------
+call "%batchFilesPath%"\"6 config ant.bat"  devPath
+IF %errorlevel% == 1 GOTO buildFailed
+@echo -------------------------------------------
+@echo Executing config - ant prepMyEclipse
+@echo -------------------------------------------
+call "%batchFilesPath%"\"7 config ant prepMyEclipse.bat"  devPath
+IF %errorlevel% == 1 GOTO buildFailed
+@echo -------------------------------------------
+@echo Executing config - ant refreshdb
+@echo -------------------------------------------
+call "%batchFilesPath%"\"8 config ant refreshdb.bat"  devPath
+IF %errorlevel% == 1 GOTO buildFailed
+GOTO end
+:buildFailed
+@echo -------------------------------------------
+@echo Build Falied
+@echo -------------------------------------------
+pause
+GOTO exit
+:end
+@echo -------------------------------------------
+@echo All Builds Successfull
+@echo -------------------------------------------
+pause
+:exit
+exit
+------------------------------------------------------------
+11 startbifrost:
+cd\
+cd C:\Dev\Source\freyatp\freya\bifrost
+startbifrost.bat
+------------------------------------------------------------
+automate:
+@echo off
+set currentDirectory=%cd%
+echo Current Directory - %currentDirectory%
+
+set /p installationDirectory=Enter provider portal installation directory:
+echo Installation Directory - %installationDirectory%
+
+echo ...............Taking Backup........................
+echo D | xcopy /s/y/z "%installationDirectory%" "%currentDirectory%\..\backup\ProviderPortal"
+echo D | xcopy /y/z "%installationDirectory%\..\ProviderPortal.war" "%currentDirectory%\..\backup"
+echo ..............Backup Completed.................
+
+echo ..........Copying changed files..................
+cd %currentDirectory%
+for /d %%D in (*) do (
+echo creating %%~nxD folder if does not exist
+echo D | xcopy /s/y/z "%%~nxD" "%installationDirectory%\%%~nxD"
+)
+echo D | xcopy /y/z "%cd%" "%installationDirectory%"
+echo ............Copying changed files completed.................
+pause
+--------------------------------------------------------------------

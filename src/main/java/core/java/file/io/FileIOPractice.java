@@ -17,10 +17,13 @@ import java.nio.channels.FileChannel;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Enumeration;
+import java.util.List;
 import java.util.Scanner;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
+import java.util.zip.ZipOutputStream;
 
 import org.junit.Ignore;
 import org.junit.Test;
@@ -340,6 +343,92 @@ public class FileIOPractice {
 
 	}
 
+    }
+
+    /**
+     * Create Zip file with single file
+     */
+    @Ignore
+    @Test
+    public void createZipFileWithOneFile() {
+	byte[] buffer = new byte[1024];
+
+	// we are using try-with-resource, so closing of resources will be done automatically
+	try (FileOutputStream fos = new FileOutputStream("E:/Backup/JavaPrep/practiceProjects/CoreJavaPractice/src/main/resources/myZip.zip");
+		ZipOutputStream zos = new ZipOutputStream(fos);
+		InputStream is = getClass().getClassLoader().getResourceAsStream("file1.txt");) {
+
+	    System.out.println("fos: " + fos);
+	    System.out.println("zos: " + zos);
+	    System.out.println("is: " + is);
+
+	    ZipEntry zipEntry = new ZipEntry("file1.log");
+	    zos.putNextEntry(zipEntry);
+
+	    int length;
+	    while ((length = is.read(buffer)) > 0) {
+		zos.write(buffer, 0, length);
+	    }
+
+	    zos.closeEntry();
+
+	    System.out.println("Zip file created");
+	} catch (IOException e) {
+	    e.printStackTrace();
+	}
+    }
+
+    /**
+     * Create zip file with files present in a folder
+     * @throws IOException 
+     */
+    @Ignore
+    @Test
+    public void createZipWithFilesInFolder() throws IOException {
+	List<String> sourceFileNamesList = new ArrayList<>();
+	String sourceFolder = "E:/Backup/JavaPrep/practiceProjects/CoreJavaPractice/src/main/resources/folder1";
+	String outputZipFile = "E:/Backup/JavaPrep/practiceProjects/CoreJavaPractice/src/main/resources/myZip2.zip";
+
+	//get all files names in a source folder
+	//if this directory contains sub-directories, iterate recursively to get all file names
+	//refer listFilesAndDirectories(File directory) method in this class
+	File sourceDirectory = new File(sourceFolder);
+	String[] sourceFileNames = sourceDirectory.list();
+	for (String sourceFileName : sourceFileNames) {
+	    int startIndex = Integer.parseInt(String.valueOf(sourceDirectory.length()));
+	    int endIndex = sourceFileName.length();
+	    sourceFileNamesList.add(sourceFileName.substring(startIndex, endIndex));
+	}
+
+	System.out.println("sourceFileNamesList: " + sourceFileNamesList);
+
+	// create zip file
+	byte[] buffer = new byte[1024];
+
+	try (FileOutputStream fos = new FileOutputStream(outputZipFile); ZipOutputStream zos = new ZipOutputStream(fos);) {
+	    for (String file : sourceFileNamesList) {
+
+		// to read file using class loader that file should be in class path else we need to complete path of file and create input stream
+		try (InputStream is = getClass().getClassLoader().getResourceAsStream(file);) {
+		    ZipEntry zipEntry = new ZipEntry(file);
+		    zos.putNextEntry(zipEntry);
+
+		    int length;
+		    while ((length = is.read(buffer)) > 0) {
+			zos.write(buffer, 0, length);
+		    }
+
+		    System.out.println("File Added: " + file);
+		} catch (Exception e) {
+		    e.printStackTrace();
+		}
+	    }
+
+	} catch (IOException e) {
+	    e.printStackTrace();
+	}
+
+	System.out.println("Zip file created");
     }
 
     /**
