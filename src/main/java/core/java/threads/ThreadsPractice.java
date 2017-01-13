@@ -4,7 +4,9 @@ import java.time.Clock;
 import java.time.Duration;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.concurrent.Callable;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutionException;
@@ -43,6 +45,7 @@ import core.java.threads.model.Thread20;
 import core.java.threads.model.Thread21;
 import core.java.threads.model.Thread22;
 import core.java.threads.model.Thread23;
+import core.java.threads.model.Thread24;
 import core.java.threads.model.Thread3;
 import core.java.threads.model.Thread4;
 import core.java.threads.model.Thread5;
@@ -460,6 +463,36 @@ public class ThreadsPractice {
     }
 
     /**
+     * @see java.util.concurrent.CountDownLatch practice
+     */
+    @Ignore
+    @Test
+    public void countDownLatch2() {
+	// create count down latch with initial value of 3
+	CountDownLatch countDownLatch = new CountDownLatch(3);
+
+	// create thread pool with 3 worked threads
+	ExecutorService executorService = Executors.newFixedThreadPool(3);
+
+	// assign 3 tasks to 3 threads in thread pool
+	for (int i = 0; i < 5; i++) {
+	    executorService.submit(new CountDownLatchThread("thread" + i, countDownLatch));
+	}
+
+	// tell executor service not to accept new threads into pool after this point
+	executorService.shutdown();
+
+	try {
+	    // wait until count down latch reaches 0
+	    countDownLatch.await();
+	} catch (InterruptedException e) {
+	    e.printStackTrace();
+	}
+
+	System.out.println(Thread.currentThread().getName() + " completed");
+    }
+
+    /**
      * Producer Consume patter using @see  java.uti.concurrent.BlockingQueue
      * @throws InterruptedException 
      */
@@ -508,7 +541,7 @@ public class ThreadsPractice {
     /**
      * @see java.util.concurrent.locks.ReentrantLock practice
      * Reentrant lock means: one thread can call one synchronized method from another synchronized method.
-     * Then same lock can be acquired same thread again. If we use Reentrant Lock it will keeps count of
+     * Then same lock can be acquired by same thread again. If we use Reentrant Lock it will keeps count of
      * how many times this lock is locked and we have to unlock it same number of times
      * 
      * @throws InterruptedException 
@@ -624,7 +657,6 @@ public class ThreadsPractice {
     @Ignore
     @Test
     public void callableFutures() throws InterruptedException, ExecutionException {
-	ExecutorService executorService = Executors.newCachedThreadPool();
 
 	Callable<List<Integer>> callable = new Callable<List<Integer>>() {
 	    @Override
@@ -637,6 +669,7 @@ public class ThreadsPractice {
 	    }
 	};
 
+	ExecutorService executorService = Executors.newCachedThreadPool();
 	Future<List<Integer>> resultFutures = executorService.submit(callable);
 	executorService.shutdown();
 	executorService.awaitTermination(1, TimeUnit.DAYS);
@@ -644,6 +677,35 @@ public class ThreadsPractice {
 	List<Integer> resultList = resultFutures.get();
 
 	System.out.println(resultList);
+    }
+
+    /**
+     * Execute multiple callables at a time
+     * @throws InterruptedException 
+     * @throws ExecutionException 
+     */
+    @Ignore
+    @Test
+    public void executeMultipleCallables() throws InterruptedException, ExecutionException {
+	ExecutorService executorService = Executors.newFixedThreadPool(5);
+	Set<Callable<List<Integer>>> callables = new HashSet<>();
+	List<Integer> finalResult = new ArrayList<>();
+
+	Callable<List<Integer>> callable1 = new Thread24(10, 20);
+	Callable<List<Integer>> callable2 = new Thread24(30, 40);
+	Callable<List<Integer>> callable3 = new Thread24(50, 60);
+
+	callables.add(callable1);
+	callables.add(callable2);
+	callables.add(callable3);
+
+	List<Future<List<Integer>>> resultFutures = executorService.invokeAll(callables);
+
+	for (Future<List<Integer>> resultFuture : resultFutures) {
+	    finalResult.addAll(resultFuture.get());
+	}
+
+	System.out.println(finalResult);
     }
 
     /**

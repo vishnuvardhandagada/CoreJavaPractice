@@ -45,8 +45,23 @@ public class StringPractice {
     @Test
     public void getAsciValueOfCharsInString() {
 	String str = "abcdefghijklmnopqrstuvwxyz";
-	byte[] strByteArray = str.getBytes();
+	byte[] strByteArray = str.getBytes(StandardCharsets.UTF_8);
 	System.out.println("asciValues: " + Arrays.toString(strByteArray));
+    }
+
+    /**
+     * convert byte array back to string
+     */
+    @Ignore
+    @Test
+    public void convertByteArrayToString() {
+	String str = "Hello World";
+	byte[] byteArray = str.getBytes();
+	System.out.println("str: " + str);
+	System.out.println("byteArray: " + byteArray);
+
+	String strFromByteArray = new String(byteArray);
+	System.out.println("strFromByteArray: " + strFromByteArray);
     }
 
 }

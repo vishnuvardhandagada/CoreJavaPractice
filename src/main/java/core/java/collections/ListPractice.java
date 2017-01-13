@@ -2,6 +2,7 @@ package core.java.collections;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -125,5 +126,27 @@ public class ListPractice {
 	}
 	listToString3.append("]");
 	System.out.println("listToString3: " + listToString3.toString());
+    }
+
+    /**
+     * Remove all nulls from List
+     */
+    @Ignore
+    @Test
+    public void removeAllNullsFromList() {
+	List<String> list = new ArrayList<>();
+	list.add("a");
+	list.add(null);
+	list.add("b");
+	list.add(null);
+	list.add("c");
+	list.add(null);
+
+	System.out.println("list: " + list);
+
+	// remove nulls
+	list.removeAll(Collections.singleton(null));
+
+	System.out.println("after remove: " + list);
     }
 }

@@ -203,6 +203,9 @@ public class FileIOPractice {
 	}
     }
 
+    /**
+     * Delete file
+     */
     @Ignore
     @Test
     public void deleteFile() {
@@ -227,6 +230,10 @@ public class FileIOPractice {
 	}
     }
 
+    /**
+     * Copy file
+     * @throws IOException
+     */
     @Ignore
     @Test
     public void copyFile() throws IOException {
@@ -268,6 +275,10 @@ public class FileIOPractice {
 	System.out.println("java.nio.file.Files -> file copied");
     }
 
+    /**
+     * Create file
+     * @throws IOException
+     */
     @Ignore
     @Test
     public void createFile() throws IOException {

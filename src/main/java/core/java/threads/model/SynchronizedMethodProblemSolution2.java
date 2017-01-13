@@ -39,6 +39,21 @@ public class SynchronizedMethodProblemSolution2 {
 
     }
 
+    public void method3() {
+	synchronized (lock1) {
+	    try {
+		Thread.sleep(1);
+
+		if (!list1.isEmpty()) {
+		    list1.remove(0);
+		}
+
+	    } catch (InterruptedException e) {
+		e.printStackTrace();
+	    }
+	}
+    }
+
     public List<Integer> getList1() {
 	return list1;
     }

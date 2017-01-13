@@ -61,7 +61,7 @@ public class EnumsPractice {
 	}
     }
 
-    @Ignore
+    //    @Ignore
     @Test
     public void iterateEnumWithArgumentedConstructor() {
 	DaysEnum2[] days = DaysEnum2.values();
