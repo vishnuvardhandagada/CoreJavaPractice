@@ -30,6 +30,8 @@ public class ReadJSON {
     /**
      * Method to create object by reading JSON String
      */
+    @Ignore
+    @Test
     public void prepareObjectFromJSONString() {
 	try {
 	    ObjectMapper mapper = new ObjectMapper();
@@ -44,6 +46,8 @@ public class ReadJSON {
     /**
      * Method to prepare json node tree model
      */
+    //    @Ignore
+    @Test
     public void prepareTreeModelFromJSONString() {
 	try {
 	    ObjectMapper mapper = new ObjectMapper();

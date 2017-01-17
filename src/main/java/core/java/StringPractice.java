@@ -64,4 +64,17 @@ public class StringPractice {
 	System.out.println("strFromByteArray: " + strFromByteArray);
     }
 
+    /**
+     * divide string based on delimeter
+     */
+    @Ignore
+    @Test
+    public void divideString() {
+	String str = "Hello-Java-World-Welcome-to-Java";
+	String[] strs = str.split("-");
+
+	for (String s : strs) {
+	    System.out.println(s);
+	}
+    }
 }
