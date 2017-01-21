@@ -1,5 +1,6 @@
 package csv.opencsv.practice;
 
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
@@ -68,6 +69,25 @@ public class WriteCSVPractice {
 	    csvWriter.writeNext(row2);
 
 	    System.out.println("CSV File create with ~ separator and each value enclosed with single-quote");
+	}
+    }
+
+    @Test
+    public void createCSVFileWithCommaInColumn() {
+	File file = new File("E:\\Backup\\JavaPrep\\practiceProjects\\CoreJavaPractice\\src\\main\\java\\csv\\opencsv\\practice\\model\\file5.csv");
+	try {
+	    file.createNewFile();
+	} catch (IOException e1) {
+	    e1.printStackTrace();
+	}
+	try (CSVWriter csvWriter = new CSVWriter(new FileWriter(file));) {
+	    String s1 = "six";
+	    String s2 = "seven";
+	    String s3 = s1 + "," + s2;
+	    String[] row2 = new String[] { s1.toString(), s2.toString(), s3.toString() };
+	    csvWriter.writeNext(row2);
+	} catch (IOException e) {
+	    e.printStackTrace();
 	}
     }
 }
