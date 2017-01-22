@@ -11,4 +11,9 @@ public class MethodReferenceUtil {
 	System.out.println("MethodReferenceUtil.utilMethod2()");
 	return "utilMethod2()";
     }
+
+    public String utilMethod3(String value1, String value2) {
+	System.out.println("value1: " + value1 + ", value2: " + value2);
+	return value1 + value2;
+    }
 }
