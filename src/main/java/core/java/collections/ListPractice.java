@@ -1,5 +1,6 @@
 package core.java.collections;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -9,6 +10,8 @@ import java.util.stream.Collectors;
 
 import org.junit.Ignore;
 import org.junit.Test;
+
+import core.java.collections.model.Employee;
 
 public class ListPractice {
 
@@ -148,5 +151,84 @@ public class ListPractice {
 	list.removeAll(Collections.singleton(null));
 
 	System.out.println("after remove: " + list);
+    }
+
+    @Ignore
+    @Test
+    public void list1MinusList2() {
+	List<String> list1 = new ArrayList<>();
+	list1.add("a");
+	list1.add("b");
+	list1.add("c");
+	list1.add("d");
+	list1.add("e");
+
+	List<String> list2 = new ArrayList<>();
+	list2.add("a");
+	list2.add("b");
+	list2.add("c");
+
+	System.out.println("list1: " + list1);
+	System.out.println("list2: " + list2);
+
+	list1.removeAll(list2);
+	System.out.println("After removeAll -> list1: " + list1);
+    }
+
+    @Ignore
+    @Test
+    public void list1IntersectionList2() {
+	List<String> list1 = new ArrayList<>();
+	list1.add("a");
+	list1.add("b");
+	list1.add("c");
+	list1.add("d");
+	list1.add("e");
+
+	List<String> list2 = new ArrayList<>();
+	list2.add("a");
+	list2.add("b");
+	list2.add("c");
+
+	System.out.println("list1: " + list1);
+	System.out.println("list2: " + list2);
+
+	list1.retainAll(list2);
+	System.out.println("After retainAll -> list1: " + list1);
+    }
+
+    /**
+     * Prepare sorted list using java 8 collection streams
+     */
+    @Ignore
+    @Test
+    public void sortListByDate() {
+	List<Employee> employeeList = Arrays.asList(new Employee(LocalDate.of(2017, 04, 12)), new Employee(LocalDate.of(2017, 04, 13)), new Employee(
+		LocalDate.of(2017, 01, 01)), new Employee(LocalDate.of(2017, 02, 10)), new Employee(LocalDate.of(2017, 03, 11)));
+
+	List<Employee> sortedList = employeeList.stream().sorted((e1, e2) -> e1.getLocalDate().compareTo(e2.getLocalDate()))
+		.collect(Collectors.toList());
+
+	System.out.println("employeeList: " + employeeList);
+	System.out.println("sortedList: " + sortedList);
+    }
+
+    /**
+     * get list of String from employee object using java 8 streams
+     */
+    //    @Ignore
+    @Test
+    public void getFirstNameListFromEmployee() {
+	List<Employee> employeeList = Arrays.asList(new Employee(LocalDate.of(2017, 04, 12), "john"),
+		new Employee(LocalDate.of(2017, 04, 13), "jack"), new Employee(LocalDate.of(2017, 01, 01), "jill"),
+		new Employee(LocalDate.of(2017, 02, 10), "mahesh"), new Employee(LocalDate.of(2017, 03, 11), "suresh"));
+
+	// using method reference
+	List<String> namesList = employeeList.stream().map(Employee::getFirstName).collect(Collectors.toList());
+	System.out.println("namesList: " + namesList);
+
+	// using lambda expression
+	List<String> namesList2 = employeeList.stream().map(employee -> employee.getFirstName()).collect(Collectors.toList());
+	System.out.println("namesList2: " + namesList2);
     }
 }

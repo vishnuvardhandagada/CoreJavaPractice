@@ -1,5 +1,8 @@
 package core.java;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.Clock;
 import java.time.Duration;
 import java.time.Instant;
@@ -209,7 +212,7 @@ public class DatePractice {
 	System.out.println("convertZonedDateTimeToUtilDate() date: " + date);
     }
 
-    //    @Ignore
+    @Ignore
     @Test
     public void convertLocalDateTimeToZonedDateTime() {
 	Clock clock = Clock.systemDefaultZone();
@@ -218,6 +221,36 @@ public class DatePractice {
 
 	ZonedDateTime zonedDateTime = localDateTime.atZone(ZoneId.systemDefault());
 	System.out.println("convertLocalDateTimeToZonedDateTime() zonedDateTime: " + zonedDateTime);
+    }
+
+    /**
+     * Method to convert one date format to another date format
+     * @throws ParseException 
+     */
+    //    @Ignore
+    @Test
+    public void converDateFormat1() throws ParseException {
+	/*convert date from yyyy-mm-dd to mm/dd/yyyy*/
+	DateFormat fromFormat1 = new SimpleDateFormat("yyyy-mm-dd");
+	DateFormat toFormat1 = new SimpleDateFormat("mm/dd/yyyy");
+
+	Date date = fromFormat1.parse("2017-01-27");
+	String convertedDate1 = toFormat1.format(date);
+	System.out.println("convertedDate1: " + convertedDate1);
+
+	/*convert date from yyyy-mm-dd to dd/mm/yyyy*/
+	DateFormat fromFormat2 = new SimpleDateFormat("yyyy-mm-dd");
+	DateFormat toFormat2 = new SimpleDateFormat("dd/mm/yyyy");
+	Date date2 = fromFormat2.parse("2017-01-27");
+	String convertedDate2 = toFormat2.format(date2);
+	System.out.println("convertedDate2: " + convertedDate2);
+
+	/*convert date from dd/mm/yyyy to yyyy-mm-dd*/
+	DateFormat fromFormat3 = new SimpleDateFormat("dd/mm/yyyy");
+	DateFormat toFormat3 = new SimpleDateFormat("yyyy-mm-dd");
+	Date date3 = fromFormat3.parse("27/01/2017");
+	String convertedDate3 = toFormat3.format(date3);
+	System.out.println("convertedDate3: " + convertedDate3);
     }
 
 }
