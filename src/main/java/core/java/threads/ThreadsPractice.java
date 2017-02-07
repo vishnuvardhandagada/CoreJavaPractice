@@ -46,6 +46,7 @@ import core.java.threads.model.Thread21;
 import core.java.threads.model.Thread22;
 import core.java.threads.model.Thread23;
 import core.java.threads.model.Thread24;
+import core.java.threads.model.Thread25;
 import core.java.threads.model.Thread3;
 import core.java.threads.model.Thread4;
 import core.java.threads.model.Thread5;
@@ -740,5 +741,25 @@ public class ThreadsPractice {
 	    System.out.println(ex.getMessage());
 	}
 
+    }
+
+    @Test
+    public void multipleCallablesWithException() {
+	ExecutorService executorService = Executors.newFixedThreadPool(3);
+
+	Callable<Integer> callable1 = new Thread25();
+	Callable<Integer> callable2 = new Thread25();
+	Callable<Integer> callable3 = new Thread25();
+
+	List<Callable<Integer>> callableList = new ArrayList<>();
+	callableList.add(callable1);
+	callableList.add(callable2);
+	callableList.add(callable3);
+	try {
+	    List<Future<Integer>> futureList = executorService.invokeAll(callableList);
+	    futureList.get(0).get();
+	} catch (InterruptedException | ExecutionException e) {
+	    e.printStackTrace();
+	}
     }
 }
