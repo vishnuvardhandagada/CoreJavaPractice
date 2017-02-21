@@ -2,7 +2,9 @@ package core.java;
 
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import org.junit.Ignore;
 import org.junit.Test;
@@ -62,6 +64,32 @@ public class StringPractice {
 
 	String strFromByteArray = new String(byteArray);
 	System.out.println("strFromByteArray: " + strFromByteArray);
+    }
+
+    /**
+     * convert String to byte array and get each character from that byte array
+     */
+    @Ignore
+    @Test
+    public void convertStringToCharArray() {
+	String str = "Hello World";
+	byte[] byteArray = str.getBytes();
+	String byteString = Arrays.toString(byteArray);
+	System.out.println(byteString);
+
+	byteString = byteString.substring(1, byteString.length() - 1);
+	System.out.println(byteString);
+
+	String[] asciValues = byteString.split(",");
+
+	List<String> charsList = new ArrayList<>();
+
+	for (String asciValue : asciValues) {
+	    String c = String.valueOf((char) Integer.parseInt(asciValue.trim()));
+	    charsList.add(c);
+	}
+
+	System.out.println(charsList);
     }
 
     /**

@@ -46,7 +46,7 @@ public class ReadJSON {
     /**
      * Method to prepare json node tree model
      */
-    //    @Ignore
+    @Ignore
     @Test
     public void prepareTreeModelFromJSONString() {
 	try {
@@ -119,12 +119,17 @@ public class ReadJSON {
     /**
      * Reading JSON from file
      */
+    @Test
     public void readJSONFromFile() {
 	try {
 	    ObjectMapper mapper = new ObjectMapper();
-	    File jsonFile = new File("E:/Backup/JavaPrep/practiceProjects/CoreJavaPractice/src/main/java/json/jackson/practice/car.json");
+	    /*File jsonFile = new File("E:/Backup/JavaPrep/practiceProjects/CoreJavaPractice/src/main/java/json/jackson/practice/car.json");
 	    Car car = mapper.readValue(jsonFile, Car.class);
-	    System.out.println("Car:: " + car);
+	    System.out.println("Car:: " + car);*/
+
+	    File jsonFile = new File("C:\\Users\\Admin\\Desktop\\file1.json");
+	    String jsonString = mapper.readValue(jsonFile, String.class);
+	    System.out.println(jsonString);
 	} catch (IOException e) {
 	    e.printStackTrace();
 	}
