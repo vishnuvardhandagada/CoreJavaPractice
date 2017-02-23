@@ -2,6 +2,7 @@ package core.java.java8.collections.streams;
 
 import java.time.LocalDate;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.IntSummaryStatistics;
 import java.util.List;
 import java.util.Map;
@@ -18,7 +19,7 @@ import org.junit.Test;
 
 import core.java.collections.model.Employee;
 
-public class CollectionsStreamsListPractice {
+public class CollectionStreamsPractice {
 
     /**
      * Prepare stream and print each element in the stream using method reference
@@ -342,5 +343,47 @@ public class CollectionsStreamsListPractice {
 	Map<Integer, String> employeesMap = employees.stream().collect(
 		Collectors.toMap(Employee::getAge, Employee::getFirstName, (name1, name2) -> name1 + "," + name2));
 	System.out.println(employeesMap);
+    }
+
+    /**
+     * Sort of list of object (Employee)
+     */
+    @Ignore
+    @Test
+    public void sortList() {
+	List<Employee> employees = Arrays.asList(new Employee("mahesh", 25), new Employee("suresh", 18), new Employee("jack", 22), new Employee(
+		"jill", 19));
+
+	Comparator<Employee> firstNameComparator = (e1, e2) -> {
+	    return e1.getFirstName().compareTo(e2.getFirstName());
+	};
+
+	// collect entire object into a list
+	List<Employee> sortedByFirstName = employees.stream().sorted(firstNameComparator).collect(Collectors.toList());
+	System.out.println("sortedByFirstName: " + sortedByFirstName);
+
+	// collect only firstName from sorted list
+	List<String> sortByFirstName2 = employees.stream().sorted(firstNameComparator).map(Employee::getFirstName).collect(Collectors.toList());
+	System.out.println("sortByFirstName2: " + sortByFirstName2);
+
+	// in line lambda expression
+	List<Employee> sortByAge = employees.stream().sorted((e1, e2) -> {
+	    return Integer.valueOf(e1.getAge()).compareTo(Integer.valueOf(e2.getAge()));
+	}).collect(Collectors.toList());
+	System.out.println("sortByAge: " + sortByAge);
+
+	List<Employee> employees2 = Arrays.asList(new Employee("jack", "G"), new Employee("jack", "C"), new Employee("jack", "A"), new Employee(
+		"jack", "H"));
+	Comparator<Employee> firstNameComparator2 = (e1, e2) -> {
+	    return e1.getFirstName().compareTo(e2.getFirstName());
+	};
+	Comparator<Employee> lastNameComparator = (e1, e2) -> {
+	    return e1.getLastName().compareTo(e2.getLastName());
+	};
+
+	// sort by first name first and then last name
+	List<Employee> sortedByFirstNameThenLastName = employees2.stream().sorted(firstNameComparator2.thenComparing(lastNameComparator))
+		.collect(Collectors.toList());
+	System.out.println("sortedByFirstNameThenLastName: " + sortedByFirstNameThenLastName);
     }
 }

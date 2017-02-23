@@ -6,6 +6,7 @@ public class Employee {
 
     private LocalDate joiningDate;
     private String firstName;
+    private String lastName;
     private int age;
 
     public Employee() {
@@ -23,6 +24,11 @@ public class Employee {
     public Employee(String firstName, int age) {
 	this.firstName = firstName;
 	this.age = age;
+    }
+
+    public Employee(String firstName, String lastName) {
+	this.firstName = firstName;
+	this.lastName = lastName;
     }
 
     public Employee(String firstName) {
@@ -57,8 +63,16 @@ public class Employee {
 	this.age = age;
     }
 
+    public String getLastName() {
+	return lastName;
+    }
+
+    public void setLastName(String lastName) {
+	this.lastName = lastName;
+    }
+
     @Override
     public String toString() {
-	return "[firstName: " + firstName + ", age: " + age + "]";
+	return "[firstName: " + firstName + ", lastName: " + lastName + ", age: " + age + "]";
     }
 }
