@@ -3,11 +3,13 @@ package core.java.java8.collections.streams;
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.HashSet;
 import java.util.IntSummaryStatistics;
 import java.util.List;
 import java.util.Map;
 import java.util.OptionalDouble;
 import java.util.OptionalInt;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.DoubleStream;
 import java.util.stream.IntStream;
@@ -181,8 +183,9 @@ public class CollectionStreamsPractice {
     @Ignore
     @Test
     public void sortListByDate() {
-	List<Employee> employeeList = Arrays.asList(new Employee(LocalDate.of(2017, 04, 12)), new Employee(LocalDate.of(2017, 04, 13)), new Employee(
-		LocalDate.of(2017, 01, 01)), new Employee(LocalDate.of(2017, 02, 10)), new Employee(LocalDate.of(2017, 03, 11)));
+	List<Employee> employeeList = Arrays.asList(new Employee(LocalDate.of(2017, 04, 12), "jack"),
+		new Employee(LocalDate.of(2017, 04, 13), "jill"), new Employee(LocalDate.of(2017, 01, 01), "john"),
+		new Employee(LocalDate.of(2017, 02, 10), "scott"), new Employee(LocalDate.of(2017, 03, 11), "amy"));
 
 	List<Employee> sortedList = employeeList.stream().sorted((e1, e2) -> e1.getJoiningDate().compareTo(e2.getJoiningDate()))
 		.collect(Collectors.toList());
@@ -305,7 +308,7 @@ public class CollectionStreamsPractice {
     }
 
     /**
-     * Group employees by age
+     * Group employees by age with summary statistics
      */
     @Ignore
     @Test
@@ -346,7 +349,7 @@ public class CollectionStreamsPractice {
     }
 
     /**
-     * Sort of list of object (Employee)
+     * Sort of list of Employee objects
      */
     @Ignore
     @Test
@@ -385,5 +388,62 @@ public class CollectionStreamsPractice {
 	List<Employee> sortedByFirstNameThenLastName = employees2.stream().sorted(firstNameComparator2.thenComparing(lastNameComparator))
 		.collect(Collectors.toList());
 	System.out.println("sortedByFirstNameThenLastName: " + sortedByFirstNameThenLastName);
+    }
+
+    /**
+     * If Stream contains Collection of data then operations like filter, sum, distinct, Collectors are not supported. So we need to use flatMap() for 
+     * following conversion:
+     * Stream<String[]>		-> flatMap ->	Stream<String>
+     * Stream<Set<String>>	-> flatMap ->	Stream<String>
+     * Stream<List<String>>	-> flatMap ->	Stream<String>
+     * Stream<List<Object>>	-> flatMap ->	Stream<Object>
+     * 
+     * collection of data after using flatMap():
+     * { {1,2}, {3,4}, {5,6} } -> flatMap -> {1,2,3,4,5,6}
+     * { {'a','b'}, {'c','d'}, {'e','f'} } -> flatMap -> {'a','b','c','d','e','f'}
+     */
+    @Ignore
+    @Test
+    public void flatMapPractice() {
+	// 2-D String array without flatMap()
+	String[][] stringArray1 = new String[][] { { "a", "b" }, { "c", "d" }, { "e", "f" } };
+	Stream<String[]> streamOfArray1 = Arrays.stream(stringArray1);
+	Stream<String[]> filter1 = streamOfArray1.filter(e -> "a".equals(e));
+	System.out.println("Result 1: ");
+	filter1.forEach(System.out::print);
+
+	// 2-D String array with flatMap()
+	String[][] stringArray2 = new String[][] { { "a", "b" }, { "c", "d" }, { "e", "f" } };
+	Stream<String[]> streamOfArray2 = Arrays.stream(stringArray2);
+	Stream<String> streamOfArray2Flatted = streamOfArray2.flatMap(e -> Arrays.stream(e));
+	Stream<String> filter2 = streamOfArray2Flatted.filter(e -> "a".equals(e));
+	System.out.println("Result 2: ");
+	filter2.forEach(System.out::print);
+
+	// java.util.Set<String>
+	Set<String> set1 = new HashSet<>(Arrays.asList("a", "b", "c", "d", "a", "e", "c"));
+	Stream<Set<String>> streamOfSet = Stream.of(set1);
+	List<String> list1 = streamOfSet.flatMap(e -> e.stream()).distinct().collect(Collectors.toList());
+	System.out.println("Result 3: ");
+	list1.forEach(System.out::print);
+
+	// int[]
+	int[] intArray = new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 0 };
+	Stream<int[]> intArrayStream = Stream.of(intArray);
+	IntStream intStream = intArrayStream.flatMapToInt(e -> Arrays.stream(e));
+	System.out.println("Result 4: ");
+	intStream.forEach(System.out::print);
+    }
+
+    /**
+     * Remove duplicates in a list
+     */
+    //    @Ignore
+    @Test
+    public void removeDuplicatesInList() {
+	List<String> list1 = Arrays.asList("a", "b", "c", "d", "a", "e", "c");
+	List<String> list1Result = list1.stream().distinct().collect(Collectors.toList());
+	System.out.print("list1Result: ");
+	list1Result.forEach(System.out::print);
     }
 }

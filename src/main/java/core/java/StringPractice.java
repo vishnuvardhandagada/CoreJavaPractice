@@ -5,6 +5,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.StringTokenizer;
 
 import org.junit.Ignore;
 import org.junit.Test;
@@ -69,7 +70,7 @@ public class StringPractice {
     /**
      * convert String to byte array and get each character from that byte array
      */
-    @Ignore
+    //    @Ignore
     @Test
     public void convertStringToCharArray() {
 	String str = "Hello World";
@@ -103,6 +104,93 @@ public class StringPractice {
 
 	for (String s : strs) {
 	    System.out.println(s);
+	}
+    }
+
+    @Ignore
+    @Test
+    public void capitalizeFirstChar() {
+	String hello = "hello";
+
+	String result = hello.substring(0, 1).toUpperCase() + hello.substring(1, hello.length());
+	System.out.println(result);
+    }
+
+    @Ignore
+    @Test
+    public void stringShift() {
+	String s = "abcd";
+	if (s.isEmpty()) {
+	    return;
+	}
+	int leftShift = 1;
+	while (leftShift > s.length()) {
+	    leftShift = leftShift - s.length();
+	}
+	String leftShiftResult = s.substring(leftShift) + s.substring(0, leftShift);
+	System.out.println(leftShiftResult);
+
+	int rightShift = 3;
+	int length = 0;
+	if (leftShiftResult.length() > rightShift)
+	    length = leftShiftResult.length() - rightShift;
+	else
+	    length = rightShift - leftShiftResult.length();
+
+	String rightShiftResult = leftShiftResult.substring(length) + leftShiftResult.substring(0, length);
+	System.out.println(rightShiftResult);
+
+    }
+
+    @Ignore
+    @Test
+    public void printAllSubStringsOfSpecifiedLength() {
+	String s = "welcometojava";
+
+	// substring of length 3
+	List<String> subStrings = new ArrayList<>();
+	for (int i = 0; i <= s.length() - 3; i++) {
+	    subStrings.add(s.substring(i, i + 3));
+	}
+	System.out.println(subStrings);
+
+	// substring of length 4
+	List<String> subStrings2 = new ArrayList<>();
+	for (int i = 0; i <= s.length() - 4; i++) {
+	    subStrings2.add(s.substring(i, i + 4));
+	}
+	System.out.println(subStrings2);
+
+	// substring of length 5
+	List<String> subStrings3 = new ArrayList<>();
+	for (int i = 0; i <= s.length() - 5; i++) {
+	    subStrings3.add(s.substring(i, i + 5));
+	}
+	System.out.println(subStrings3);
+    }
+
+    @Test
+    public void test() {
+	String s = "He is a very very good boy, isn't he?";
+	s = s.replaceAll("!", " ");
+	System.out.println(s);
+	s = s.replaceAll(",", " ");
+	System.out.println(s);
+	s = s.replaceAll("\\?", " ");
+	System.out.println(s);
+	s = s.replaceAll("\\.", " ");
+	System.out.println(s);
+	s = s.replaceAll("_", " ");
+	s = s.replaceAll("'", " ");
+	System.out.println(s);
+	s = s.replaceAll("@", " ");
+
+	System.out.println(s);
+	StringTokenizer str = new StringTokenizer(s, " ");
+
+	System.out.println("str.countTokens(): " + str.countTokens());
+	while (str.hasMoreTokens()) {
+	    System.out.println(str.nextToken());
 	}
     }
 }

@@ -12,6 +12,8 @@ import java.time.LocalTime;
 import java.time.Month;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
 import java.util.Date;
 
 import org.junit.Ignore;
@@ -227,7 +229,7 @@ public class DatePractice {
      * Method to convert one date format to another date format
      * @throws ParseException 
      */
-    //    @Ignore
+    @Ignore
     @Test
     public void converDateFormat1() throws ParseException {
 	/*convert date from yyyy-mm-dd to mm/dd/yyyy*/
@@ -253,4 +255,100 @@ public class DatePractice {
 	System.out.println("convertedDate3: " + convertedDate3);
     }
 
+    /**
+     * Convert String to java.util.Date
+     * 
+     * String to Date -> SimpleDateFormat.parse(String)
+     * Date to String -> SimpleDateFormat.format(date)
+     * @throws ParseException 
+     */
+    @Ignore
+    @Test
+    public void convertStringToUtilDate() throws ParseException {
+	// 20-Jul-2017
+	SimpleDateFormat simpleDateFormat1 = new SimpleDateFormat("dd-MMM-yyyy");
+	String date1 = "20-Jul-2017";
+
+	Date convertedDate1 = simpleDateFormat1.parse(date1);
+	System.out.println("convertedDate1: " + convertedDate1);
+	System.out.println("simpleDateFormat1.format(convertedDate1): " + simpleDateFormat1.format(convertedDate1));
+
+	// 20/07/2017
+	SimpleDateFormat simpleDateFormat2 = new SimpleDateFormat("dd/MM/yyyy");
+	String date2 = "20/07/2017";
+	Date convertedDate2 = simpleDateFormat2.parse(date2);
+	System.out.println("convertedDate2: " + convertedDate2);
+	System.out.println("simpleDateFormat2.format(convertedDate2): " + simpleDateFormat2.format(convertedDate2));
+
+	//Thu, July 20 2017
+	SimpleDateFormat simpleDateFormat3 = new SimpleDateFormat("E, MMM dd yyyy");
+	String date3 = "Thu, July 20 2017";
+	Date convertedDate3 = simpleDateFormat3.parse(date3);
+	System.out.println("convertedDate3: " + convertedDate3);
+	System.out.println("simpleDateFormat3.format(convertedDate3): " + simpleDateFormat3.format(convertedDate3));
+
+	//Thursday, July 10 2017 12:10:08 PM
+	SimpleDateFormat simpleDateFormat4 = new SimpleDateFormat("EEEE, MMM dd yyyy HH:mm:ss a");
+	String date4 = "Thursday, July 20 2017 12:10:08 PM";
+	Date convertedDate4 = simpleDateFormat4.parse(date4);
+	System.out.println("convertedDate4: " + convertedDate4);
+	System.out.println("simpleDateFormat4.format(convertedDate4): " + simpleDateFormat4.format(convertedDate4));
+    }
+
+    /**
+     * Convert String to java.time.LocalDate
+     */
+    @Ignore
+    @Test
+    public void convertStrintToLocalDate() {
+	// 10/07/2017
+	String date1 = "20/07/2017";
+	DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("d/MM/yyyy");
+	LocalDate localDate1 = LocalDate.parse(date1, formatter1);
+	System.out.println("localDate1: " + localDate1);
+	System.out.println("formatter1.format(localDate1): " + formatter1.format(localDate1));
+
+	//10-07-2017
+	String date2 = "2017-07-21";
+	LocalDate localDate2 = LocalDate.parse(date2);
+	System.out.println("localDate2: " + localDate2);
+
+	// 20-Jul-2017
+	String date3 = "20-Jul-2017";
+	DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("d-MMM-yyyy");
+	LocalDate localDate3 = LocalDate.parse(date3, formatter2);
+	System.out.println("localDate3: " + localDate3);
+	System.out.println("formatter2.format(localDate3): " + formatter2.format(localDate3));
+
+	//Thu, Jul 20 2017
+	String date4 = "Thu, Jul 20 2017";
+	DateTimeFormatter formatter3 = DateTimeFormatter.ofPattern("E, MMM d yyyy");
+	LocalDate localDate4 = LocalDate.parse(date4, formatter3);
+	System.out.println("localDate4: " + localDate4);
+	System.out.println("formatter3.format(localDate4): " + formatter3.format(localDate4));
+
+	//Thursday, Jul 10 2017 12:10:08 PM
+	String date5 = "Thursday, Jul 20 2017 12:10:08 PM";
+	DateTimeFormatter formatter4 = DateTimeFormatter.ofPattern("EEEE, MMM d yyyy HH:mm:ss a");
+	LocalDateTime localDate5 = LocalDateTime.parse(date5, formatter4);
+	System.out.println("localDate5: " + localDate5);
+	System.out.println("formatter4.format(localDate5): " + formatter4.format(localDate5));
+    }
+
+    /**
+     * Print day of week if date is given
+     */
+    //    @Ignore
+    @Test
+    public void getDayOfWeek() {
+	int year = 2015;
+	int month = 8;
+	int day = 5;
+
+	Calendar calendar = Calendar.getInstance();
+	calendar.set(year, month - 1, day);
+	Date date = calendar.getTime();
+	SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEEE");
+	System.out.println(simpleDateFormat.format(date).toUpperCase());
+    }
 }

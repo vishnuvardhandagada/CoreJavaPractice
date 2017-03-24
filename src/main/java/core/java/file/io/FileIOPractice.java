@@ -11,7 +11,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.LineNumberReader;
 import java.io.OutputStream;
+import java.io.Reader;
 import java.net.URL;
 import java.nio.channels.FileChannel;
 import java.nio.charset.StandardCharsets;
@@ -470,5 +472,20 @@ public class FileIOPractice {
 		+ System.getProperty("sun.java.command").substring(0, System.getProperty("sun.java.command").lastIndexOf("."))
 			.replace(".", File.separator);
 	System.out.println("FileIOPractice -> getCurrentDirectory() -> myCurrentDir: " + myCurrentDir);
+    }
+
+    //    @Ignore
+    @Test
+    public void lineNumberReader() throws IOException {
+	URL url = getClass().getClassLoader().getResource("file1.txt");
+	File file = new File(url.getPath());
+
+	Reader reader = new FileReader(file);
+	try (LineNumberReader lineNumberReader = new LineNumberReader(reader)) {
+
+	    String line;
+	    while (null != (line = lineNumberReader.readLine()))
+		System.out.println(lineNumberReader.getLineNumber() + ": " + line);
+	}
     }
 }

@@ -193,4 +193,34 @@ public class ListPractice {
 	list1.retainAll(list2);
 	System.out.println("After retainAll -> list1: " + list1);
     }
+
+    /**
+     * list1 = {a,b,c,d,e}
+     * list2 = {a,b,c,f,g,h}
+     * output = {a,b,c,d,e,f,g,h}
+     */
+    @Ignore
+    @Test
+    public void prepareNewListWithUniqueValues() {
+	List<String> list1 = new ArrayList<>();
+	list1.add("a");
+	list1.add("b");
+	list1.add("c");
+	list1.add("d");
+	list1.add("e");
+
+	List<String> list2 = new ArrayList<>();
+	list2.add("a");
+	list2.add("b");
+	list2.add("c");
+	list2.add("f");
+	list2.add("g");
+	list2.add("h");
+
+	List<String> commonElementsList = new ArrayList<>(list2);
+	commonElementsList.retainAll(list1);
+	list2.removeAll(commonElementsList);
+	list1.addAll(list2);
+	System.out.println(list1);
+    }
 }
