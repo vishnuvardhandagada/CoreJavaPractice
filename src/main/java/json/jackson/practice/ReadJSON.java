@@ -119,6 +119,7 @@ public class ReadJSON {
     /**
      * Reading JSON from file
      */
+    @Ignore
     @Test
     public void readJSONFromFile() {
 	try {

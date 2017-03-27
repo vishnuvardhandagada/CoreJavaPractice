@@ -65,6 +65,8 @@ public class ThreadsPractice {
 
     /**
      * Different methods to create threads
+     * 
+     * If we call start() method more than once - we will get IllegalStateException
      */
     @Ignore
     @Test
@@ -329,6 +331,9 @@ public class ThreadsPractice {
 
     /**
      * Thread.sleep(milliSec) practice
+     * If we call sleep(0) with 0 milli seconds: What happens depends on platform
+     * Thread may not sleep at all or may sleep for less no.of time etc
+     * To make current thread sleep for certain milli seconds
      */
     @Ignore
     @Test
@@ -345,6 +350,25 @@ public class ThreadsPractice {
 
 	Duration duration = Duration.between(startTime, endTime);
 	System.out.println("time taken: " + duration.getSeconds());
+    }
+
+    /**
+     * To sleep the current thread we can use java.util.concurrent.TimeUnit as below
+     * To Time unit we need to pass unit value. sleep method on TimeUnit throws InterruptedExcepion
+     * @throws InterruptedException 
+     */
+    @Ignore
+    @Test
+    public void threadSleepWithTimeUnit() throws InterruptedException {
+	int value = 3;
+	System.out.println("Sleeping for " + value + " micro seconds");
+	TimeUnit.MICROSECONDS.sleep(value);
+
+	System.out.println("Sleeping for " + value + " milli seconds");
+	TimeUnit.MILLISECONDS.sleep(value);
+
+	System.out.println("Sleeping for " + value + " seconds");
+	TimeUnit.SECONDS.sleep(value);
     }
 
     /**
@@ -389,7 +413,7 @@ public class ThreadsPractice {
 
 	System.out.println("----- All tasks submitted ----");
 
-	// wait until all tasks are completed
+	// wait until all tasks are completed. This should be called only after executorService.shutdown()
 	executorService.awaitTermination(3, TimeUnit.HOURS);
 
 	System.out.println("---- All tasks completed ---");
@@ -743,6 +767,7 @@ public class ThreadsPractice {
 
     }
 
+    @Ignore
     @Test
     public void multipleCallablesWithException() {
 	ExecutorService executorService = Executors.newFixedThreadPool(3);

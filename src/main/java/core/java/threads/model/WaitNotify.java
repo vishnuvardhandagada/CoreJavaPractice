@@ -23,8 +23,8 @@ public class WaitNotify {
 
 	synchronized (this) {
 	    System.out.println("consume() method running");
-	    notify();
 	    System.out.println("consume() method completed");
+	    notify();
 	}
     }
 }
