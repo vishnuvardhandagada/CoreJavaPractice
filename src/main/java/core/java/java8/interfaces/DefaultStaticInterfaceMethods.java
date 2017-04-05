@@ -8,22 +8,22 @@ package core.java.java8.interfaces;
  */
 public interface DefaultStaticInterfaceMethods {
 
-    /**
-     * static method
-     */
-    public static String method1() {
-	System.out.println("DefaultStaticInterfaceMethods.method1() called");
-	return "method1()";
-    }
+	/**
+	 * static method
+	 */
+	public static String method1() {
+		System.out.println("DefaultStaticInterfaceMethods.method1() called");
+		return "method1()";
+	}
 
-    /**
-     * default method
-     * 
-     * @return
-     */
-    default String method2() {
-	System.out.println("DefaultStaticInterfaceMethods.method2() called");
-	return "method2()";
-    }
+	/**
+	 * default method
+	 * 
+	 * @return
+	 */
+	public default String method2() {
+		System.out.println("DefaultStaticInterfaceMethods.method2() called");
+		return "method2()";
+	}
 
 }

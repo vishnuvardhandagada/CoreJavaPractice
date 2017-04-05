@@ -7,11 +7,12 @@ package core.java.java8.constructor.references;
  */
 public class ConstructorReferenceUtil1 {
 
-    public ConstructorReferenceUtil1() {
-	System.out.println("ConstructorReferenceUtil1() constructor");
-    }
+	public ConstructorReferenceUtil1() {
+		System.out.println("ConstructorReferenceUtil1() constructor");
+	}
 
-    public ConstructorReferenceUtil1(String name1, String name2) {
-	System.out.println("ConstructorReferenceUtil1() constructor" + ", name1: " + name1 + ", name2: " + name2);
-    }
+	public ConstructorReferenceUtil1(String name1, String name2) {
+		System.out.println("ConstructorReferenceUtil1() constructor" + ", name1: " + name1 + ", name2: "
+				+ name2);
+	}
 }

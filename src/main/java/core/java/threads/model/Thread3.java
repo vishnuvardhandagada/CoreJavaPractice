@@ -7,21 +7,25 @@ package core.java.threads.model;
  */
 public class Thread3 implements Runnable {
 
-    private Counter counter;
+	private Counter counter;
 
-    public Thread3(Counter counter) {
-	this.counter = counter;
-    }
-
-    @Override
-    public void run() {
-	for (int i = 0; i < 10000; i++) {
-	    counter.increment1();
+	public Thread3(Counter counter) {
+		this.counter = counter;
 	}
 
-	for (int i = 0; i < 10000; i++) {
-	    counter.increment2();
+	@Override
+	public void run() {
+		for (int i = 0; i < 10000; i++) {
+			counter.increment1();
+		}
+
+		for (int i = 0; i < 10000; i++) {
+			try {
+				counter.increment2();
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
 	}
-    }
 
 }
