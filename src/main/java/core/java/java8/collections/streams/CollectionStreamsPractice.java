@@ -577,7 +577,7 @@ public class CollectionStreamsPractice {
 	@Test
 	public void printNonEmptyStrings() {
 		List<String> strings = Arrays.asList("a", "", "b", "", "c", "", "d");
-		System.out.println("number of empty strings: "
+		System.out.println("non empty strings list: "
 				+ strings.stream().filter(str -> !str.isEmpty()).collect(Collectors.toList()));
 	}
 
@@ -588,7 +588,7 @@ public class CollectionStreamsPractice {
 	@Test
 	public void printTwoNonEmptyStrings() {
 		List<String> strings = Arrays.asList("a", "", "b", "", "c", "", "d");
-		System.out.println("number of empty strings: "
+		System.out.println("First two non empty strings: "
 				+ strings.stream().filter(str -> !str.isEmpty()).limit(2).collect(Collectors.toList()));
 	}
 
