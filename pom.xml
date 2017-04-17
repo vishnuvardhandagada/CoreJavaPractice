@@ -1,4 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>core.java</groupId>
 	<artifactId>CoreJavaPractice</artifactId>
@@ -61,7 +62,7 @@
 		</dependency>
 
 		<!-- AspectJ -->
-		 <dependency>
+		<dependency>
 			<groupId>org.aspectj</groupId>
 			<artifactId>aspectjrt</artifactId>
 			<version>1.8.10</version>
@@ -79,6 +80,17 @@
 			<version>4.3.5.RELEASE</version>
 		</dependency>
 
+		<!-- Java Mail dependencies -->
+		<dependency>
+			<groupId>javax</groupId>
+			<artifactId>javaee-api</artifactId>
+			<version>7.0</version>
+		</dependency>
+		<dependency>
+			<groupId>javax.mail</groupId>
+			<artifactId>mail</artifactId>
+			<version>1.4</version>
+		</dependency>
 
 	</dependencies>
 
@@ -103,7 +115,8 @@
 					<artifactId>exec-maven-plugin</artifactId>
 					<version>1.3.2</version>
 					<configuration>
-						<!-- dont change this main class entry. This is used in testing java 8 parameter names functionality -->
+						<!-- dont change this main class entry. This is used in testing java 
+							8 parameter names functionality -->
 						<mainClass>core.java.java8.paramter.names.ParameterNamesPractice</mainClass>
 					</configuration>
 				</plugin>
