@@ -15,6 +15,7 @@ import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.TimeZone;
 
 import org.junit.Ignore;
 import org.junit.Test;
@@ -253,6 +254,13 @@ public class DatePractice {
 		Date date3 = fromFormat3.parse("27/01/2017");
 		String convertedDate3 = toFormat3.format(date3);
 		System.out.println("convertedDate3: " + convertedDate3);
+
+		/*convert Thu Apr 20 22:52:16 IST 2017 to 2017/04/20*/
+		SimpleDateFormat fromFormat4 = new SimpleDateFormat("E MMM dd HH:mm:ss Z yyyy");
+		SimpleDateFormat toFormat4 = new SimpleDateFormat("yyyy/MM/dd");
+		Date date4 = fromFormat4.parse("Thu Apr 20 22:52:16 IST 2017");
+		String convertedDate4 = toFormat4.format(date4);
+		System.out.println("convertedDate4: " + convertedDate4);
 	}
 
 	/**
@@ -297,6 +305,15 @@ public class DatePractice {
 		System.out.println("convertedDate4: " + convertedDate4);
 		System.out.println("simpleDateFormat4.format(convertedDate4): "
 				+ simpleDateFormat4.format(convertedDate4));
+
+		// Sun Apr 16 22:52:16 EDT 2017
+		SimpleDateFormat simpleDateFormat5 = new SimpleDateFormat("E MMM dd HH:mm:ss Z yyyy");
+		simpleDateFormat5.setTimeZone(TimeZone.getTimeZone("EDT"));
+		String date5 = "Sun Apr 16 22:52:16 EDT 2017";
+		Date convertedDate5 = simpleDateFormat5.parse(date5);
+		System.out.println("convertedDate5: " + convertedDate5);
+		System.out.println("simpleDateFormat5.format(convertedDate5): "
+				+ simpleDateFormat5.format(convertedDate5));
 	}
 
 	/**
