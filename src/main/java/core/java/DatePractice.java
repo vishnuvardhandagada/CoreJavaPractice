@@ -230,7 +230,7 @@ public class DatePractice {
 	 * Method to convert one date format to another date format
 	 * @throws ParseException 
 	 */
-	@Ignore
+	//	@Ignore
 	@Test
 	public void converDateFormat1() throws ParseException {
 		/*convert date from yyyy-mm-dd to mm/dd/yyyy*/
@@ -261,6 +261,12 @@ public class DatePractice {
 		Date date4 = fromFormat4.parse("Thu Apr 20 22:52:16 IST 2017");
 		String convertedDate4 = toFormat4.format(date4);
 		System.out.println("convertedDate4: " + convertedDate4);
+
+		// convert new Date to yyyy/MM/dd
+		Date date5 = new Date();
+		DateFormat toFormat5 = new SimpleDateFormat("yyyy/MM/dd");
+		String convertedDate5 = toFormat5.format(date5);
+		System.out.println("convertedDate5: " + convertedDate5);
 	}
 
 	/**
