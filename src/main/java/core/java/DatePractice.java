@@ -1,5 +1,6 @@
 package core.java;
 
+import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -11,6 +12,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.Month;
 import java.time.ZoneId;
+import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
@@ -230,7 +232,7 @@ public class DatePractice {
 	 * Method to convert one date format to another date format
 	 * @throws ParseException 
 	 */
-	//	@Ignore
+	@Ignore
 	@Test
 	public void converDateFormat1() throws ParseException {
 		/*convert date from yyyy-mm-dd to mm/dd/yyyy*/
@@ -327,7 +329,7 @@ public class DatePractice {
 	 */
 	@Ignore
 	@Test
-	public void convertStrintToLocalDate() {
+	public void convertStringToLocalDate() {
 		// 10/07/2017
 		String date1 = "20/07/2017";
 		DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("d/MM/yyyy");
@@ -377,5 +379,17 @@ public class DatePractice {
 		Date date = calendar.getTime();
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEEE");
 		System.out.println(simpleDateFormat.format(date).toUpperCase());
+	}
+
+	/**
+	 * Convert java.time.LocalDateTime to java.sql.Timestamp
+	 */
+	@Test
+	@Ignore
+	public void convertLocalDateTimeToTimestamp() {
+		LocalDateTime localDateTime = LocalDateTime.now(Clock.systemDefaultZone());
+		System.out.println("localDateTime: " + localDateTime); // localDateTime: 2017-05-30T21:29:25.097
+		Timestamp timestamp = Timestamp.from(localDateTime.toInstant(ZoneOffset.ofHours(0)));
+		System.out.println("timestamp: " + timestamp); // timestamp: 2017-05-31 02:59:25.097
 	}
 }

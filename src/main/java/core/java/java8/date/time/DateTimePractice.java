@@ -314,6 +314,15 @@ public class DateTimePractice {
 		Date date3 = fromFormat3.parse("27/01/2017");
 		String convertedDate3 = toFormat3.format(date3);
 		System.out.println("convertedDate3: " + convertedDate3);
+
+		/* dd/MMM/yyyy == convert date format. Display short form of month like Jan, May
+		 * hh:mm:ss ==  time in 12 hours format. 
+		 * HH:mm:ss == time in 24 hours format
+		 * a == display AM/PM*/
+		DateFormat dateFormat4 = new SimpleDateFormat("dd/MMM/yyyy hh:mm:ss a");
+		Date date4 = new Date();
+		String convertedDate4 = dateFormat4.format(date4);
+		System.out.println("convertedDate4: " + convertedDate4);
 	}
 
 	/**
