@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 import core.java.java8.java.util.function.model.Employee;
@@ -22,7 +21,7 @@ public class PredicatePractice {
 	/**
 	 * Display all Male employees
 	 */
-	@Ignore
+	//	@Ignore
 	@Test
 	public void allMaleEmployees() {
 		List<Employee> employees = Arrays.asList(new Employee("firstName1", "lastName1", 20000L, "M"),
