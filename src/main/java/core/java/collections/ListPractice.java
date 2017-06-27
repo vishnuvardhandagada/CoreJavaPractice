@@ -245,4 +245,27 @@ public class ListPractice {
 			e.printStackTrace();
 		}
 	}
+
+	/**
+	 * Changes to sub list will reflect in main list
+	 */
+	@Ignore
+	@Test
+	public void subListChangesReflectToMainList() {
+		List<String> mainList = new ArrayList<>();
+		mainList.add("one");
+		mainList.add("two");
+		mainList.add("three");
+		mainList.add("four");
+		List<String> subList = mainList.subList(0, 2);
+
+		System.out.println("---Before-----");
+		System.out.println("mainList size: " + mainList.size() + ", mainList: " + mainList);
+		System.out.println("subList size: " + subList.size() + ", subList: " + subList);
+
+		subList.add("five");
+		System.out.println("---Before-----");
+		System.out.println("mainList size: " + mainList.size() + ", mainList: " + mainList);
+		System.out.println("subList size: " + subList.size() + ", subList: " + subList);
+	}
 }
