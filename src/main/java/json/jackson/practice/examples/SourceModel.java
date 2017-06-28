@@ -36,4 +36,12 @@ public class SourceModel {
 
 	public void setVal5(Double val5) {
 	}
+
+	public String getVal6() {
+		return "";
+	}
+
+	public String getVal7() {
+		return "";
+	}
 }
