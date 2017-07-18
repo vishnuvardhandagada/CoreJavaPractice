@@ -392,4 +392,32 @@ public class DatePractice {
 		Timestamp timestamp = Timestamp.from(localDateTime.toInstant(ZoneOffset.ofHours(0)));
 		System.out.println("timestamp: " + timestamp); // timestamp: 2017-05-31 02:59:25.097
 	}
+
+	/**
+	 * Add day, month and year to java.util.Date
+	 */
+	@Test
+	@Ignore
+	public void addDayMonthYearToJavaUtilDate() {
+		Calendar calendar = Calendar.getInstance();
+		System.out.println("Current Date: " + calendar.getTime());
+
+		calendar.add(Calendar.DAY_OF_MONTH, 10);
+		System.out.println("Add 10 days: " + calendar.getTime());
+
+		calendar.add(Calendar.MONTH, 1);
+		System.out.println("Add 1 month: " + calendar.getTime());
+
+		calendar.add(Calendar.YEAR, 3);
+		System.out.println("Add 3 years: " + calendar.getTime());
+
+		calendar.add(Calendar.DAY_OF_MONTH, -5);
+		System.out.println("Reduce 5 days: " + calendar.getTime());
+
+		calendar.add(Calendar.MONTH, -2);
+		System.out.println("Reduce 2 months: " + calendar.getTime());
+
+		calendar.add(Calendar.YEAR, -4);
+		System.out.println("Reduce 4 years: " + calendar.getTime());
+	}
 }

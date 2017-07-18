@@ -1,8 +1,13 @@
 package core.java.collections;
 
+import java.time.Clock;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Collections;
+import java.util.Comparator;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -267,5 +272,120 @@ public class ListPractice {
 		System.out.println("---Before-----");
 		System.out.println("mainList size: " + mainList.size() + ", mainList: " + mainList);
 		System.out.println("subList size: " + subList.size() + ", subList: " + subList);
+	}
+
+	/**
+	 * Sort list by java.util.Date
+	 */
+	@Test
+	@Ignore
+	public void sortListByJavaUtilDate() {
+		List<List<Object>> list = new ArrayList<>();
+		Calendar calendar = Calendar.getInstance();
+
+		List<Object> row1 = new ArrayList<>();
+		row1.add(1);
+		row1.add(calendar.getTime());
+
+		List<Object> row2 = new ArrayList<>();
+		row2.add(1);
+		calendar.add(Calendar.DAY_OF_MONTH, 3);
+		row2.add(calendar.getTime());
+
+		List<Object> row3 = new ArrayList<>();
+		row3.add(1);
+		calendar.add(Calendar.DAY_OF_MONTH, 3);
+		row3.add(calendar.getTime());
+
+		List<Object> row4 = new ArrayList<>();
+		row4.add(1);
+		calendar.add(Calendar.DAY_OF_MONTH, 3);
+		row4.add(calendar.getTime());
+
+		List<Object> row5 = new ArrayList<>();
+		row5.add(1);
+		calendar.add(Calendar.DAY_OF_MONTH, 3);
+		row5.add(calendar.getTime());
+
+		List<Object> row6 = new ArrayList<>();
+		row6.add(1);
+		calendar.add(Calendar.DAY_OF_MONTH, 3);
+		row6.add(calendar.getTime());
+
+		list.add(row6);
+		list.add(row5);
+		list.add(row4);
+		list.add(row3);
+		list.add(row2);
+		list.add(row1);
+
+		Comparator<List<Object>> dateComparator = (list1, list2) -> {
+			Date date1 = (Date) list1.get(1);
+			Date date2 = (Date) list2.get(1);
+
+			return date1.compareTo(date2);
+		};
+		System.out.println("------------- Before -------------");
+		System.out.println(list);
+
+		list.sort(dateComparator);
+
+		System.out.println("------------- After -------------");
+		System.out.println(list);
+	}
+
+	/**
+	 * Sort list by java.time.LocalDate
+	 */
+	@Test
+	//	@Ignore
+	public void sortListByJavaTimeLocalDate() {
+		List<List<Object>> list = new ArrayList<>();
+		LocalDate localDate = LocalDate.now(Clock.systemDefaultZone());
+
+		List<Object> row1 = new ArrayList<>();
+		row1.add(1);
+		row1.add(localDate);
+
+		List<Object> row2 = new ArrayList<>();
+		row2.add(2);
+		row2.add(localDate.plusDays(1));
+
+		List<Object> row3 = new ArrayList<>();
+		row3.add(3);
+		row3.add(localDate.plusDays(2));
+
+		List<Object> row4 = new ArrayList<>();
+		row4.add(4);
+		row4.add(localDate.plusDays(3));
+
+		List<Object> row5 = new ArrayList<>();
+		row5.add(5);
+		row5.add(localDate.plusDays(4));
+
+		List<Object> row6 = new ArrayList<>();
+		row6.add(6);
+		row6.add(localDate.plusDays(5));
+
+		list.add(row6);
+		list.add(row5);
+		list.add(row4);
+		list.add(row3);
+		list.add(row2);
+		list.add(row1);
+
+		Comparator<List<Object>> dateComparator = (list1, list2) -> {
+			LocalDate date1 = (LocalDate) list1.get(1);
+			LocalDate date2 = (LocalDate) list2.get(1);
+
+			return date1.compareTo(date2);
+		};
+		System.out.println("------------- Before -------------");
+		System.out.println(list);
+
+		list.sort(dateComparator);
+
+		System.out.println("------------- After -------------");
+		System.out.println(list);
 	}
 }
