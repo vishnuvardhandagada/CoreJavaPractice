@@ -420,4 +420,26 @@ public class DatePractice {
 		calendar.add(Calendar.YEAR, -4);
 		System.out.println("Reduce 4 years: " + calendar.getTime());
 	}
+
+	/**
+	 * Check whether input date is past date or not
+	 * @throws ParseException
+	 */
+	@Ignore
+	@Test
+	public void dateFormatPractice() throws ParseException {
+		String inputDate = "20170710";
+		DateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
+		Date convertDate = dateFormat.parse(inputDate);
+		System.out.println("convertDate: " + convertDate);
+
+		Instant instant = convertDate.toInstant();
+		ZoneId systemDefaultZoneId = ZoneId.systemDefault();
+		LocalDate localDate = instant.atZone(systemDefaultZoneId).toLocalDate();
+		System.out.println("localDate: " + localDate);
+
+		LocalDate today = LocalDate.now(Clock.systemDefaultZone());
+		boolean isPast = localDate.isBefore(today);
+		System.out.println("isPast: " + isPast);
+	}
 }
