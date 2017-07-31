@@ -98,7 +98,7 @@ public class ListPractice {
 	/**
 	 * Method to prepare comma separated String from List values
 	 */
-	@Ignore
+	//	@Ignore
 	@Test
 	public void convertListToCommaSeparatedString() {
 		List<String> list = Arrays.asList("A", "B", "C", "D", "E");
@@ -131,6 +131,10 @@ public class ListPractice {
 		}
 		listToString3.append("]");
 		System.out.println("listToString3: " + listToString3.toString());
+
+		// method 4
+		String listToString4 = String.join("-", list);
+		System.out.println("listToString4: " + listToString4);
 	}
 
 	/**
