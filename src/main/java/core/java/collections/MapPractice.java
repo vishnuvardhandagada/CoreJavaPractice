@@ -1,6 +1,7 @@
 package core.java.collections;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -177,5 +178,43 @@ public class MapPractice {
 		System.out.println(map.get(1));
 
 		System.out.println(map.getOrDefault(0, "No mapping Found"));
+	}
+
+	/**
+	 * Create HashMap
+	 */
+	@Test
+	public void createHashMap() {
+		Map<String, String> map = new HashMap<>();
+		for (int i = 0; i < 10; i++) {
+			map.put("" + i, "value" + i);
+		}
+		System.out.println("map: " + map);
+	}
+
+	/**
+	 * Get All Keys
+	 */
+	@Test
+	public void getAllKeys() {
+		Map<Integer, String> map = new HashMap<>();
+		for (int i = 0; i < 10; i++) {
+			map.put(i, "value" + i);
+		}
+		Set<Integer> keys = map.keySet();
+		System.out.println("keys: " + keys);
+	}
+
+	/**
+	 * Get All Values
+	 */
+	@Test
+	public void getAllValues() {
+		Map<Integer, String> map = new HashMap<>();
+		for (int i = 0; i < 10; i++) {
+			map.put(i, "value" + i);
+		}
+		Collection<String> values = map.values();
+		System.out.println("values: " + values);
 	}
 }
