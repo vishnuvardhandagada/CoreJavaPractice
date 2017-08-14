@@ -37,10 +37,18 @@ public class ReflectionAPIPractice {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
 
-		/*
-		 * Method method = klass.getMethod(key, Array.newInstance(list.get(0).getClass(), list.size()).getClass();
-		 * method.invoke(destinationModelObject, new Object[]{ list.toArray() });
-		 */
+	@Test
+	public void method3() {
+		try {
+			Class<?> klass = Class.forName("core.java.reflection.api.model.ReflectionAPIModel1");
+			System.out.println(klass);
+
+			Object object = klass.newInstance();
+			System.out.println(object);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }

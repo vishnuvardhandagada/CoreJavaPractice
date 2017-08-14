@@ -425,21 +425,31 @@ public class DatePractice {
 	 * Check whether input date is past date or not
 	 * @throws ParseException
 	 */
-	@Ignore
 	@Test
 	public void dateFormatPractice() throws ParseException {
+		// method 1
 		String inputDate = "20170710";
 		DateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
 		Date convertDate = dateFormat.parse(inputDate);
-		System.out.println("convertDate: " + convertDate);
 
 		Instant instant = convertDate.toInstant();
 		ZoneId systemDefaultZoneId = ZoneId.systemDefault();
 		LocalDate localDate = instant.atZone(systemDefaultZoneId).toLocalDate();
-		System.out.println("localDate: " + localDate);
 
 		LocalDate today = LocalDate.now(Clock.systemDefaultZone());
 		boolean isPast = localDate.isBefore(today);
-		System.out.println("isPast: " + isPast);
+		boolean isFuture = localDate.isAfter(today);
+		System.out.println("inputDate: " + localDate + ", today: " + today + ", isPast: " + isPast
+				+ ", isFuture: " + isFuture);
+
+		// method 2
+		String inputDate2 = "20190814";
+		DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyyMMdd");
+		LocalDate localDate2 = LocalDate.parse(inputDate2, dateTimeFormatter);
+		LocalDate today2 = LocalDate.now(Clock.systemDefaultZone());
+		boolean isPast2 = localDate2.isBefore(today2);
+		boolean isFuture2 = localDate2.isAfter(today2);
+		System.out.println("inputDate2: " + localDate2 + ", today2: " + today2 + ", isPast2: " + isPast2
+				+ ", isFuture: " + isFuture2);
 	}
 }
