@@ -452,4 +452,33 @@ public class DatePractice {
 		System.out.println("inputDate2: " + localDate2 + ", today2: " + today2 + ", isPast2: " + isPast2
 				+ ", isFuture: " + isFuture2);
 	}
+
+	@Test
+	public void dateIssue() {
+		try {
+			// 20170999
+			SimpleDateFormat simpleDateFormat1 = new SimpleDateFormat("yyyyMMdd");
+			simpleDateFormat1.setLenient(false);
+			String date1 = "20170999";
+			Date convertedDate1 = simpleDateFormat1.parse(date1);
+			System.out.println("convertedDate1: " + convertedDate1);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+
+		try {
+			// 20170999
+			String date1 = "20170999";
+			DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("yyyyMMdd");
+			LocalDate localDate1 = LocalDate.parse(date1, formatter1);
+			System.out.println("localDate1: " + localDate1);
+			System.out.println("formatter1.format(localDate1): " + formatter1.format(localDate1));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		Calendar calendar = Calendar.getInstance();
+		calendar.set(2017, 9, 99);
+		System.out.println(calendar);
+	}
 }
