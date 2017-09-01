@@ -454,9 +454,9 @@ public class DatePractice {
 	}
 
 	@Test
-	public void dateIssue() {
+	public void validateUsingUtilDate() {
+		// 20170999 - using java.util.Date
 		try {
-			// 20170999
 			SimpleDateFormat simpleDateFormat1 = new SimpleDateFormat("yyyyMMdd");
 			simpleDateFormat1.setLenient(false);
 			String date1 = "20170999";
@@ -466,8 +466,22 @@ public class DatePractice {
 			e.printStackTrace();
 		}
 
+		// 20170999 - using java.util.Date
 		try {
-			// 20170999
+			SimpleDateFormat simpleDateFormat2 = new SimpleDateFormat("yyyyMMdd");
+			String date2 = "20170999";
+			Date convertedDate2 = simpleDateFormat2.parse(date2);
+			System.out.println("convertedDate2: " + convertedDate2);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+
+	}
+
+	@Test
+	public void validateUsingLocalDate() {
+		//  20170999 - using java.time.LocalDate
+		try {
 			String date1 = "20170999";
 			DateTimeFormatter formatter1 = DateTimeFormatter.ofPattern("yyyyMMdd");
 			LocalDate localDate1 = LocalDate.parse(date1, formatter1);
@@ -476,9 +490,21 @@ public class DatePractice {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
-		Calendar calendar = Calendar.getInstance();
-		calendar.set(2017, 9, 99);
-		System.out.println(calendar);
 	}
+
+	@Test
+	public void convertLocalDateToString() {
+		// MMM-yy
+		LocalDate localDate = LocalDate.now(Clock.systemDefaultZone());
+		DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("MMM-yy");
+		System.out.println("localDate: " + localDate + ", convertedDate: "
+				+ dateTimeFormatter.format(localDate));
+
+		// dd-MM-yy
+		LocalDate localDate2 = LocalDate.now(Clock.systemDefaultZone());
+		DateTimeFormatter dateTimeFormatter2 = DateTimeFormatter.ofPattern("dd-MMM-yy");
+		System.out.println("localDate: " + localDate2 + ", convertedDate: "
+				+ dateTimeFormatter2.format(localDate2));
+	}
+
 }
