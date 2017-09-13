@@ -5,6 +5,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.Clock;
+import java.time.DayOfWeek;
 import java.time.Duration;
 import java.time.Instant;
 import java.time.LocalDate;
@@ -15,8 +16,10 @@ import java.time.ZoneId;
 import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.TextStyle;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 import java.util.TimeZone;
 
 import org.junit.Ignore;
@@ -505,6 +508,40 @@ public class DatePractice {
 		DateTimeFormatter dateTimeFormatter2 = DateTimeFormatter.ofPattern("dd-MMM-yy");
 		System.out.println("localDate: " + localDate2 + ", convertedDate: "
 				+ dateTimeFormatter2.format(localDate2));
+	}
+
+	@Test
+	public void calculateNoOfWeekendsBetweenTwoDays() {
+		// jdk 8 
+		LocalDate fromDate = LocalDate.of(2017, 9, 12);
+		LocalDate toDate = LocalDate.of(2017, 9, 15);
+		calculateNoOfWeekends(fromDate, toDate);
+
+		fromDate = LocalDate.of(2017, 9, 12);
+		toDate = LocalDate.of(2017, 9, 18);
+		calculateNoOfWeekends(fromDate, toDate);
+
+		fromDate = LocalDate.of(2017, 9, 16);
+		toDate = LocalDate.of(2017, 9, 25);
+		calculateNoOfWeekends(fromDate, toDate);
+	}
+
+	private void calculateNoOfWeekends(LocalDate fromDate, LocalDate toDate) {
+		System.out.println("Input -> fromDate: " + fromDate + ", toDate: " + toDate);
+
+		int noOfWeekends = 0;
+		do {
+			DayOfWeek dayOfWeek = fromDate.getDayOfWeek();
+			String weekName = dayOfWeek.getDisplayName(TextStyle.FULL, Locale.ENGLISH);
+			System.out.println("fromDate: " + fromDate + ", weekName: " + weekName);
+
+			if ("saturday".equalsIgnoreCase(weekName) || "sunday".equalsIgnoreCase(weekName)) {
+				noOfWeekends++;
+			}
+			fromDate = fromDate.plusDays(1);
+		} while (fromDate.isBefore(toDate));
+
+		System.out.println("number of weekends: " + noOfWeekends);
 	}
 
 }
