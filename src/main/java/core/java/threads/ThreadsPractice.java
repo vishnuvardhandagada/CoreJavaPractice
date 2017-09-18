@@ -449,7 +449,6 @@ public class ThreadsPractice {
 	 * volatile key word practice
 	 * @throws InterruptedException
 	 */
-	@Ignore
 	@Test
 	public void volatilePractice() throws InterruptedException {
 		Counter counter = new Counter();
