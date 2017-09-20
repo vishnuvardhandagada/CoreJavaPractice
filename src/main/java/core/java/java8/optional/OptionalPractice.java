@@ -2,13 +2,17 @@ package core.java.java8.optional;
 
 import java.util.Optional;
 
-import org.junit.Ignore;
-import org.junit.Test;
-
 public class OptionalPractice {
 
-	@Ignore
-	@Test
+	public static void main(String[] args) {
+		OptionalPractice optionalPractice = new OptionalPractice();
+
+		System.out.println("--- calling method1 with String value: Jack");
+		optionalPractice.method1("Jack");
+		System.out.println("--- calling method1 with null value");
+		optionalPractice.method1(null);
+	}
+
 	public void method1(String arg0) {
 		// null value
 		Optional<String> fullName = Optional.ofNullable(null);
