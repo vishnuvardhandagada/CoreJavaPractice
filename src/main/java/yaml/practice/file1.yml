@@ -1,0 +1,43 @@
+# this is comment
+
+name: jack
+
+name2: 'john'
+
+name3: '#name'
+
+# in properties following are properties
+#spring.datasource.initial-size=1
+#spring.datasource.max-active=10
+#spring.datasource.min-idle=5
+#spring.datasource.max-idle=12
+
+# above properties in yaml
+spring:
+  datasource:
+    initial-size: 1
+    max-active: 10
+    min-idle: 5
+    max-idle: 12
+    
+# lists in yaml - method 1
+list1:
+- value1: one
+- value2: two
+
+# lists in yaml - method 2
+list2:
+  - value1: one
+  - value2: two
+
+# map in yaml
+map1:
+  key: name
+  value: jill
+
+# list of maps
+list3:
+  - key: name
+    value: james
+  - key: name
+    value: smith
