@@ -370,7 +370,6 @@ public class DatePractice {
 	/**
 	 * Print day of week if date is given
 	 */
-	@Ignore
 	@Test
 	public void getDayOfWeek() {
 		int year = 2015;
@@ -381,7 +380,20 @@ public class DatePractice {
 		calendar.set(year, month - 1, day);
 		Date date = calendar.getTime();
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("EEEE");
-		System.out.println(simpleDateFormat.format(date).toUpperCase());
+		System.out.println(simpleDateFormat.format(date));
+
+		SimpleDateFormat simpleDateFormat2 = new SimpleDateFormat("E");
+		System.out.println(simpleDateFormat2.format(date));
+
+		SimpleDateFormat simpleDateFormat3 = new SimpleDateFormat("EEE");
+		System.out.println(simpleDateFormat3.format(date));
+
+		// JDK 8
+		LocalDateTime localDateTime = LocalDateTime.of(2017, 9, 27, 8, 24);
+		System.out.println(localDateTime.getDayOfWeek().getDisplayName(TextStyle.FULL, Locale.ENGLISH));
+
+		LocalDate localDate = LocalDate.of(2017, 9, 27);
+		System.out.println(localDate.getDayOfWeek().getDisplayName(TextStyle.FULL, Locale.ENGLISH));
 	}
 
 	/**
@@ -399,7 +411,6 @@ public class DatePractice {
 	/**
 	 * Add day, month and year to java.util.Date
 	 */
-	@Test
 	@Ignore
 	public void addDayMonthYearToJavaUtilDate() {
 		Calendar calendar = Calendar.getInstance();
@@ -544,4 +555,17 @@ public class DatePractice {
 		System.out.println("number of weekends: " + noOfWeekends);
 	}
 
+	@Test
+	public void convertLocalDateTimeToLocalDate() {
+		LocalDateTime localDateTime = LocalDateTime.of(2017, 9, 27, 8, 29);
+		LocalDate localDate = localDateTime.toLocalDate();
+		System.out.println("localDate: " + localDate);
+	}
+
+	@Test
+	public void convertLocalDateTimeToLocalTime() {
+		LocalDateTime localDateTime = LocalDateTime.of(2017, 9, 27, 8, 29);
+		LocalTime localTime = localDateTime.toLocalTime();
+		System.out.println("localTime: " + localTime);
+	}
 }
