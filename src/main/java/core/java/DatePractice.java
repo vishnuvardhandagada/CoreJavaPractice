@@ -581,7 +581,8 @@ public class DatePractice {
 		LocalDate localDate = LocalDate.now(Clock.systemDefaultZone());
 		System.out.println("date: " + localDate.getDayOfMonth() + ", month: " + localDate.getMonthValue()
 				+ ", year: " + localDate.getYear() + ", dayOfYear: " + localDate.getDayOfYear()
-				+ ", weekOfTheYear: " + localDate.get(WeekFields.of(Locale.ENGLISH).weekOfWeekBasedYear()));
+				+ ", weekOfTheYear: " + localDate.get(WeekFields.of(Locale.ENGLISH).weekOfWeekBasedYear())
+				+ ", weekOfTheMonth: " + localDate.get(WeekFields.of(Locale.ENGLISH).weekOfMonth()));
 
 		ZoneId zoneId = ZoneId.systemDefault();
 		Date date = Date.from(localDate.atStartOfDay(zoneId).toInstant());
