@@ -17,6 +17,7 @@ import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.TextStyle;
+import java.time.temporal.WeekFields;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
@@ -555,6 +556,9 @@ public class DatePractice {
 		System.out.println("number of weekends: " + noOfWeekends);
 	}
 
+	/**
+	 * Convert java.time.LocalDateTime to java.time.LocalDate
+	 */
 	@Test
 	public void convertLocalDateTimeToLocalDate() {
 		LocalDateTime localDateTime = LocalDateTime.of(2017, 9, 27, 8, 29);
@@ -562,10 +566,33 @@ public class DatePractice {
 		System.out.println("localDate: " + localDate);
 	}
 
+	/**
+	 * Convert java.time.LocalDateTime to java.time.LocalTime
+	 */
 	@Test
 	public void convertLocalDateTimeToLocalTime() {
 		LocalDateTime localDateTime = LocalDateTime.of(2017, 9, 27, 8, 29);
 		LocalTime localTime = localDateTime.toLocalTime();
 		System.out.println("localTime: " + localTime);
+	}
+
+	@Test
+	public void getYearBaseValue() {
+		LocalDate localDate = LocalDate.now(Clock.systemDefaultZone());
+		System.out.println("date: " + localDate.getDayOfMonth() + ", month: " + localDate.getMonthValue()
+				+ ", year: " + localDate.getYear() + ", dayOfYear: " + localDate.getDayOfYear()
+				+ ", weekOfTheYear: " + localDate.get(WeekFields.of(Locale.ENGLISH).weekOfWeekBasedYear()));
+
+		ZoneId zoneId = ZoneId.systemDefault();
+		Date date = Date.from(localDate.atStartOfDay(zoneId).toInstant());
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(date);
+
+		System.out.println("date: " + calendar.get(Calendar.DATE) + ", month: "
+				+ (calendar.get(Calendar.MONTH) + 1) + ", year: " + calendar.get(Calendar.YEAR)
+				+ ", dayOfTheYear: " + calendar.get(Calendar.DAY_OF_YEAR) + ", weekOfTheYear: "
+				+ calendar.get(Calendar.WEEK_OF_YEAR) + ", monthOfTheYear: "
+				+ (calendar.get(Calendar.MONTH) + 1) + ", weekOfTheMonth: "
+				+ calendar.get(Calendar.DAY_OF_WEEK_IN_MONTH));
 	}
 }
