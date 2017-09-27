@@ -6,7 +6,7 @@ name2: 'john'
 
 name3: '#name'
 
-# in properties following are properties
+#.properties file - following are properties
 #spring.datasource.initial-size=1
 #spring.datasource.max-active=10
 #spring.datasource.min-idle=5
