@@ -12,14 +12,19 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.Month;
+import java.time.Period;
+import java.time.YearMonth;
 import java.time.ZoneId;
 import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.TextStyle;
+import java.time.temporal.ChronoUnit;
 import java.time.temporal.WeekFields;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
 
@@ -595,5 +600,112 @@ public class DatePractice {
 				+ calendar.get(Calendar.WEEK_OF_YEAR) + ", monthOfTheYear: "
 				+ (calendar.get(Calendar.MONTH) + 1) + ", weekOfTheMonth: "
 				+ calendar.get(Calendar.DAY_OF_WEEK_IN_MONTH));
+	}
+
+	@Test
+	public void lengthOfTheMonth() {
+		// until JDK 7
+		Calendar calendar = Calendar.getInstance();
+		calendar.set(2017, Calendar.SEPTEMBER, 29);
+		int daysInMonth = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
+		System.out.println("September: no.of days: " + daysInMonth);
+
+		calendar.set(2017, Calendar.FEBRUARY, 10);
+		daysInMonth = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
+		System.out.println("February: no.of days: " + daysInMonth);
+
+		// JDK 8
+		YearMonth yearMonth = YearMonth.of(2017, 9);
+		daysInMonth = yearMonth.lengthOfMonth();
+		System.out.println("JDK 8: September: no.of days: " + daysInMonth);
+
+		yearMonth = YearMonth.of(2017, 2);
+		daysInMonth = yearMonth.lengthOfMonth();
+		System.out.println("JDK 8: February: no.of days: " + daysInMonth);
+	}
+
+	@Test
+	public void getDayOfWeekOfMonth() {
+		System.out.println("All mondays of september 2017: " + getDatesOfDayOfWeekOfMonth(2017, 9, "monday"));
+		System.out.println("All sundays of february 2017: " + getDatesOfDayOfWeekOfMonth(2017, 2, "sunday"));
+	}
+
+	/**
+	 * Get dates of all mondays of a month
+	 * Get dates of all tuesdays of a month
+	 * @param year
+	 * @param month
+	 * @param day
+	 * @return
+	 */
+	private List<String> getDatesOfDayOfWeekOfMonth(int year, int month, String day) {
+		List<String> dates = new ArrayList<>();
+
+		LocalDate monthFirstDate = LocalDate.of(year, month, 1);
+		LocalDate monthLastDate = LocalDate.of(year, month, YearMonth.of(year, month).lengthOfMonth());
+
+		System.out.println("monthFirstDate: " + monthFirstDate + ", monthLastDate: " + monthLastDate);
+
+		for (; monthFirstDate.isBefore(monthLastDate); monthFirstDate = monthFirstDate.plusDays(1)) {
+			if (day.equalsIgnoreCase(monthFirstDate.getDayOfWeek().getDisplayName(TextStyle.FULL,
+					Locale.ENGLISH))) {
+				dates.add(monthFirstDate.toString());
+			}
+		}
+
+		return dates;
+	}
+
+	@Test
+	public void javaTimePeriod() {
+		Period tenDays = Period.ofDays(10);
+		System.out.println("tenDays.getDays(): " + tenDays.getDays());
+
+		Period yearsMonthsDays = Period.of(5, 3, 15);
+		System.out.println(yearsMonthsDays.getYears() + " years, " + yearsMonthsDays.getMonths()
+				+ " months, " + yearsMonthsDays.getDays() + " days");
+
+		System.out.println("--- calculation duration --- ");
+		LocalDate oldDate = LocalDate.of(1987, Month.JULY, 20);
+		LocalDate newDate = LocalDate.of(2017, Month.SEPTEMBER, 29);
+
+		System.out.println("oldDate: " + oldDate);
+		System.out.println("newDate: " + newDate);
+
+		// check period between dates
+		Period period = Period.between(oldDate, newDate);
+
+		System.out.println(period.getYears() + " years," + period.getMonths() + " months," + period.getDays()
+				+ " days");
+	}
+
+	@Test
+	public void javaTimeTemporalChronoUnit() {
+		LocalDateTime oldDate = LocalDateTime.of(1987, Month.JULY, 20, 4, 05, 00);
+		LocalDateTime newDate = LocalDateTime.of(2017, Month.SEPTEMBER, 29, 10, 05, 15);
+
+		System.out.println("oldDate: " + oldDate + ", newDate: " + newDate);
+
+		// calculate duration
+		long years = ChronoUnit.YEARS.between(oldDate, newDate);
+		long months = ChronoUnit.MONTHS.between(oldDate, newDate);
+		long weeks = ChronoUnit.WEEKS.between(oldDate, newDate);
+		long days = ChronoUnit.DAYS.between(oldDate, newDate);
+		long hours = ChronoUnit.HOURS.between(oldDate, newDate);
+		long minutes = ChronoUnit.MINUTES.between(oldDate, newDate);
+		long seconds = ChronoUnit.SECONDS.between(oldDate, newDate);
+		long milis = ChronoUnit.MILLIS.between(oldDate, newDate);
+		long nano = ChronoUnit.NANOS.between(oldDate, newDate);
+
+		System.out.println(years + " years");
+		System.out.println(months + " months");
+		System.out.println(weeks + " weeks");
+		System.out.println(days + " days");
+		System.out.println(hours + " hours");
+		System.out.println(minutes + " minutes");
+		System.out.println(seconds + " seconds");
+		System.out.println(milis + " milis");
+		System.out.println(nano + " nano");
+
 	}
 }
