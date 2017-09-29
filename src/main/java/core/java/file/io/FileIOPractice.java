@@ -459,7 +459,6 @@ public class FileIOPractice {
 	/**
 	 * Method to get current project directory
 	 */
-	@Ignore
 	@Test
 	public void getCurrentProjectDirectory() {
 		// method 1
