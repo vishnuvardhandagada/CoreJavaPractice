@@ -708,4 +708,24 @@ public class DatePractice {
 		System.out.println(nano + " nano");
 
 	}
+
+	@Test
+	public void convert12HoursDateTimeTo24Hours() throws ParseException {
+		// Java 7
+		String date = "10-Aug-2017 07:56:12 PM";
+		System.out.println("String: inputDate: " + date);
+		SimpleDateFormat fromFormat = new SimpleDateFormat("dd-MMM-yyyy hh:mm:ss a");
+		SimpleDateFormat toFormat = new SimpleDateFormat("dd-MMM-yyyy HH:mm:ss");
+
+		Date inputDate = fromFormat.parse(date);
+		System.out.println("Date: inputDate: " + inputDate);
+
+		String outputDate = toFormat.format(inputDate);
+		System.out.println("JDK7: outputDate: " + outputDate);
+
+		// Java 8
+		String outputDate2 = LocalDateTime.parse(date, DateTimeFormatter.ofPattern("dd-MMM-yyyy hh:mm:ss a"))
+				.format(DateTimeFormatter.ofPattern("dd-MMM-yyyy HH:mm:ss"));
+		System.out.println("JDK8: outputDate: " + outputDate2);
+	}
 }
