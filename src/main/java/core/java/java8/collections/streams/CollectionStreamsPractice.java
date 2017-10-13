@@ -592,7 +592,6 @@ public class CollectionStreamsPractice {
 				+ strings.stream().filter(str -> !str.isEmpty()).limit(2).collect(Collectors.toList()));
 	}
 
-	@Ignore
 	@Test
 	public void test() {
 		List<String> list = Arrays.asList("dog", "over", "good");
