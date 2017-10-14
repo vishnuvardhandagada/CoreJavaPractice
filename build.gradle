@@ -12,4 +12,16 @@ repositories{
 dependencies{ 
 	compile 'junit:junit:4.12'
 	compile 'com.opencsv:opencsv:3.8'
+	compile 'com.fasterxml.jackson.core:jackson-core:2.8.4'
+	compile 'com.fasterxml.jackson.core:jackson-annotations:2.8.4'
+	compile 'com.fasterxml.jackson.core:jackson-databind:2.8.4'
+	compile 'io.fastjson:boon:0.32'
+	compile 'com.google.code.gson:gson:2.8.0'
+	compile 'com.googlecode.json-simple:json-simple:1.1'
+	compile 'org.aspectj:aspectjrt:1.8.10'
+	compile 'org.aspectj:aspectjweaver:1.8.10'
+	compile 'org.springframework:spring-aop:4.3.5.RELEASE'
+	compile 'javax:javaee-api:7.0'
+	compile 'javax.mail:mail:1.4'
+	compile 'org.projectlombok:lombok:1.16.12'
 }
