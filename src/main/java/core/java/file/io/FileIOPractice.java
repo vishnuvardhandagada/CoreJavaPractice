@@ -18,11 +18,13 @@ import java.net.URL;
 import java.nio.channels.FileChannel;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Stream;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 import java.util.zip.ZipOutputStream;
@@ -159,7 +161,6 @@ public class FileIOPractice {
 	 * @throws FileNotFoundException
 	 * @throws IOException
 	 */
-	@Ignore
 	@Test
 	public void readContentsOfFile() throws FileNotFoundException, IOException {
 		System.out
@@ -207,6 +208,12 @@ public class FileIOPractice {
 			System.out.println("stringBuffer: " + stringBuffer);
 		} catch (IOException e) {
 			e.printStackTrace();
+		}
+
+		System.out.println("---------- method 5 using JDK 8 Collection streams ------------");
+		final Path path = new File(getClass().getClassLoader().getResource("file1.txt").getPath()).toPath();
+		try (Stream<String> lines = Files.lines(path, StandardCharsets.UTF_8)) {
+			lines.onClose(() -> System.out.println("Done")).forEach(System.out::println);
 		}
 	}
 
