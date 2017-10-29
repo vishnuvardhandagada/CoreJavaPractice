@@ -1,7 +1,7 @@
 # Core Java Examples
-** All Example classes group by package **
+All Example classes group by package
 
-* **core.java **
+* **core.java** *
 - ExceptionHandlingPractice
 - StringPractice
 - DatePractice
