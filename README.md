@@ -1,7 +1,7 @@
-1. Core Java Practice examples and Code snippets
-2. CSV Practice using open csv
-3. JSON practice using Jackson JSON
-4. JSON practice using Boon
-5. JSON practice using GSON
-6. JSON practice using Simple JSON
-7. Java8 features practice code samples
+# Core Java Examples
+** All Example classes group by package **
+
+* **core.java **
+- ExceptionHandlingPractice
+- StringPractice
+- DatePractice
