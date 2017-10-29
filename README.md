@@ -8,7 +8,7 @@ All Example classes group by package
 - HashCodeEqualsPractice
 
 **core.java.annotations**
-AnnotationsPractice
+- AnnotationsPractice
 
 **core.java.aspectj**
-AspectJAOPPractice
+- AspectJAOPPractice
