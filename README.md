@@ -5,3 +5,10 @@ All Example classes group by package
 - ExceptionHandlingPractice
 - StringPractice
 - DatePractice
+- HashCodeEqualsPractice
+
+**core.java.annotations**
+AnnotationsPractice
+
+**core.java.aspectj**
+AspectJAOPPractice
