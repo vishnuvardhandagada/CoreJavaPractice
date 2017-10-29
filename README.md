@@ -40,3 +40,14 @@
 
 **core.java.java8.base64**
 - Base64EncodeDecodePractice
+
+**core.java.java8.collections.streams**
+- CollectionStreamsPractice
+
+**core.java.java8.constructor.references**
+- ConstructorReferencePractice
+- ConstructorReferenceUtil1
+- ConstructorReferenceUtil2
+
+**core.java.java8.date.time**
+- DateTimePractice
