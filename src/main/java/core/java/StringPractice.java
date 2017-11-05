@@ -4,6 +4,8 @@ import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.StringTokenizer;
 
@@ -219,4 +221,26 @@ public class StringPractice {
 			System.out.println(str.nextToken());
 		}
 	}
+
+	@Test
+	public void sortStringsInSentnceByLength() {
+		String str = "Welcome to hacker rank test";
+		String[] strs = str.split(" ");
+
+		List<String> strList = Arrays.asList(strs);
+
+		System.out.println("strList: " + strList);
+
+		Comparator<String> lengthComparator = new Comparator<String>() {
+
+			@Override
+			public int compare(String o1, String o2) {
+				return Integer.valueOf(o1.length()).compareTo(Integer.valueOf(o2.length()));
+			}
+		};
+
+		Collections.sort(strList, lengthComparator);
+		System.out.println("sort by length: " + strList);
+	}
+
 }

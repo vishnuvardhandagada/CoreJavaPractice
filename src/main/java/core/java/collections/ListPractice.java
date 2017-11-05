@@ -15,6 +15,8 @@ import java.util.stream.Collectors;
 import org.junit.Ignore;
 import org.junit.Test;
 
+import core.java.collections.model.Student;
+
 public class ListPractice {
 
 	public static void main(String[] args) {
@@ -342,7 +344,6 @@ public class ListPractice {
 	 * Sort list by java.time.LocalDate
 	 */
 	@Test
-	//	@Ignore
 	public void sortListByJavaTimeLocalDate() {
 		List<List<Object>> list = new ArrayList<>();
 		LocalDate localDate = LocalDate.now(Clock.systemDefaultZone());
@@ -392,4 +393,38 @@ public class ListPractice {
 		System.out.println("------------- After -------------");
 		System.out.println(list);
 	}
+
+	@Test
+	public void sortList() {
+		List<Student> students = new ArrayList<>();
+		Student student1 = new Student(15, "g");
+		Student student2 = new Student(57, "a");
+		Student student3 = new Student(45, "d");
+
+		students.add(student1);
+		students.add(student2);
+		students.add(student3);
+
+		System.out.println("unsorted list: " + students);
+
+		Collections.sort(students);
+		System.out.println("default sort as per comparable: " + students);
+
+		/*Comparator<Student> idComparator = new Comparator<Student>() {
+
+			@Override
+			public int compare(Student o1, Student o2) {
+				return o1.getId().compareTo(o2.getId());
+			}
+		};*/
+
+		// using JDK 8 - Lambda Expression
+		Comparator<Student> idComparator = (Student o1, Student o2) -> {
+			return o1.getId().compareTo(o2.getId());
+		};
+
+		Collections.sort(students, idComparator);
+		System.out.println("sort by id: " + students);
+	}
+
 }
