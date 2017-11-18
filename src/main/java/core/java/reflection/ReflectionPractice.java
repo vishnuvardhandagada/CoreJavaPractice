@@ -126,22 +126,6 @@ public class ReflectionPractice {
 	}
 
 	/**
-	 * Get Super Class object of our class
-	 * 
-	 * Output:
-	 * classObject: class core.java.reflection.model.ReflectionModel1
-	 * superClassObject: class java.lang.Object
-	 */
-	@Test
-	public void getSuperClass() {
-		Class<ReflectionModel1> classObject = ReflectionModel1.class;
-		Class<? super ReflectionModel1> superClassObject = classObject.getSuperclass();
-
-		System.out.println("classObject: " + classObject);
-		System.out.println("superClassObject: " + superClassObject);
-	}
-
-	/**
 	 * Calling a method with zero arguments
 	 * 
 	 * Output:
@@ -218,6 +202,71 @@ public class ReflectionPractice {
 			System.out.println("methodObject: " + methodObject);
 		} catch (NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException
 				| IllegalArgumentException | InvocationTargetException e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * Get Super Class object of our class
+	 * 
+	 * Output:
+	 * classObject: class core.java.reflection.model.ReflectionModel1
+	 * superClassObject: class java.lang.Object
+	 */
+	@Test
+	public void getSuperClass() {
+		Class<ReflectionModel1> classObject = ReflectionModel1.class;
+		Class<? super ReflectionModel1> superClassObject = classObject.getSuperclass();
+
+		System.out.println("classObject: " + classObject);
+		System.out.println("superClassObject: " + superClassObject);
+	}
+
+	/**
+	 * Get interfaces implemented by class
+	 */
+	@Test
+	public void getImplementedInterfaces() {
+		Class<ReflectionModel1> classObject = ReflectionModel1.class;
+		Class<?>[] interfaces = classObject.getInterfaces();
+
+		Arrays.stream(interfaces).forEach(interfaceName -> {
+			System.out.println(interfaceName.getName());
+		});
+	}
+
+	/**
+	 * Calling method whose argument List&lt;String&gt;
+	 */
+	@Test
+	public void callingMethodWithStringListAsArgument() {
+		try {
+			Class<ReflectionModel1> klass = ReflectionModel1.class;
+			ReflectionModel1 reflectionModel1 = klass.newInstance();
+			Method method = klass.getMethod("method4", List.class);
+			List<String> names = Arrays.asList("jack", "jill", "john");
+			method.invoke(reflectionModel1, names);
+		} catch (InstantiationException | IllegalAccessException | NoSuchMethodException | SecurityException
+				| IllegalArgumentException | InvocationTargetException e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * Create String array instance
+	 */
+	@Test
+	public void createStringArray() {
+		try {
+			Object stringArray = Array.newInstance(Class.forName("java.lang.String"), 3);
+			Array.set(stringArray, 0, "jack");
+			Array.set(stringArray, 1, "jill");
+			Array.set(stringArray, 2, "john");
+
+			System.out.println(Array.get(stringArray, 0));
+			System.out.println(Array.get(stringArray, 1));
+			System.out.println(Array.get(stringArray, 2));
+		} catch (NegativeArraySizeException | ClassNotFoundException e) {
 			e.printStackTrace();
 		}
 	}
