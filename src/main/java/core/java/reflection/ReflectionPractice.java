@@ -4,8 +4,10 @@ import java.lang.reflect.Array;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.lang.reflect.Parameter;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 import org.junit.Test;
 
@@ -270,4 +272,36 @@ public class ReflectionPractice {
 			e.printStackTrace();
 		}
 	}
+
+	/**
+	 * Get Method Name, Modifier, Return Type
+	 */
+	@Test
+	public void getAllMethods() {
+		Class<ReflectionModel1> klass = ReflectionModel1.class;
+		Method[] methods = klass.getMethods();
+		Arrays.stream(methods).forEach(
+				method -> {
+					System.out.println("name: " + method.getName() + ", modifier: " + method.getModifiers()
+							+ ", return type: " + method.getReturnType());
+				});
+	}
+
+	/**
+	 * Get Parameter name and parameter type
+	 */
+	@Test
+	public void getMethodParamters() {
+		try {
+			Class<ReflectionModel1> klass = ReflectionModel1.class;
+			Method method = klass.getMethod("method5", Integer.class, String.class, List.class, Map.class);
+			Parameter[] parameters = method.getParameters();
+			Arrays.stream(parameters).forEach(parameter -> {
+				System.out.println("param name: " + parameter.getName() + ", type: " + parameter.getType());
+			});
+		} catch (NoSuchMethodException | SecurityException e) {
+			e.printStackTrace();
+		}
+	}
+
 }
