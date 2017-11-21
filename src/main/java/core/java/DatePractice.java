@@ -41,7 +41,6 @@ public class DatePractice {
 	/**
 	 * java.time.Clock practice
 	 */
-	@Ignore
 	@Test
 	public void clock() {
 		Clock clock = Clock.systemUTC();
@@ -53,7 +52,6 @@ public class DatePractice {
 	/**
 	 * java.time.LocalDate practice. This class will have only date part without time part
 	 */
-	@Ignore
 	@Test
 	public void localDate() {
 		LocalDate localDate1 = LocalDate.now();
@@ -67,7 +65,6 @@ public class DatePractice {
 	/**
 	 * java.time.LocalTime practice. This class will have only time part without date
 	 */
-	@Ignore
 	@Test
 	public void localTime() {
 		LocalTime localTime1 = LocalTime.now();
@@ -85,7 +82,6 @@ public class DatePractice {
 	/**
 	 * java.time.LocalDateTime practice. This class useful to work on date or time or both
 	 */
-	@Ignore
 	@Test
 	public void localDateTime() {
 		LocalDateTime localDateTime1 = LocalDateTime.now();
@@ -103,7 +99,6 @@ public class DatePractice {
 	/**
 	 * java.time.ZonedDateTime practice
 	 */
-	@Ignore
 	@Test
 	public void zonedDateTime() {
 		ZonedDateTime zonedDateTime1 = ZonedDateTime.now();
@@ -120,7 +115,6 @@ public class DatePractice {
 	/**
 	 * java.time.Duration practice.
 	 */
-	@Ignore
 	@Test
 	public void duration() {
 		LocalDateTime localDateTime1 = LocalDateTime.of(2014, Month.NOVEMBER, 27, 15, 50);
@@ -136,7 +130,6 @@ public class DatePractice {
 		System.out.println("seconds: " + duration1.getSeconds());
 	}
 
-	@Ignore
 	@Test
 	public void convertUtilDateToLocalDate() {
 		Date date = new Date();
@@ -150,7 +143,6 @@ public class DatePractice {
 		System.out.println("convertUtilDateToLocalDate() localDate: " + localDate);
 	}
 
-	@Ignore
 	@Test
 	public void convertLocalDateToUtilDate() {
 		LocalDate localDate = LocalDate.now();
@@ -161,7 +153,6 @@ public class DatePractice {
 		System.out.println("convertLocalDateToUtilDate() date: " + date);
 	}
 
-	@Ignore
 	@Test
 	public void convertUtilDateToLocalDateTime() {
 		Date date = new Date();
@@ -175,7 +166,6 @@ public class DatePractice {
 		System.out.println("convertUtilDateToLocalDateTime() localDateTime: " + localDateTime);
 	}
 
-	@Ignore
 	@Test
 	public void convertLocalDateTimeToUtilDate() {
 		Clock clock = Clock.systemDefaultZone();
@@ -187,7 +177,6 @@ public class DatePractice {
 		System.out.println("convertLocalDateTimeToUtilDate() date: " + date);
 	}
 
-	@Ignore
 	@Test
 	public void convertUtilDateToLocalTime() {
 		Date date = new Date();
@@ -201,7 +190,6 @@ public class DatePractice {
 		System.out.println("convertUtilDateToLocalTime() localTime: " + localTime);
 	}
 
-	@Ignore
 	@Test
 	public void convertUtilDateToZonedDateTime() {
 		Date date = new Date();
@@ -215,7 +203,6 @@ public class DatePractice {
 		System.out.println("convertUtilDateToZonedDateTime() zonedDateTime: " + zonedDateTime);
 	}
 
-	@Ignore
 	@Test
 	public void convertZonedDateTimeToUtilDate() {
 		Clock clock = Clock.systemDefaultZone();
@@ -226,7 +213,6 @@ public class DatePractice {
 		System.out.println("convertZonedDateTimeToUtilDate() date: " + date);
 	}
 
-	@Ignore
 	@Test
 	public void convertLocalDateTimeToZonedDateTime() {
 		Clock clock = Clock.systemDefaultZone();
