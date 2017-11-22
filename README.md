@@ -51,3 +51,9 @@
 
 **core.java.java8.date.time**
 - DateTimePractice
+
+**core.java.reflection**
+- ReflectionPractice
+
+**core.java.generics**
+- GenericsPractice
