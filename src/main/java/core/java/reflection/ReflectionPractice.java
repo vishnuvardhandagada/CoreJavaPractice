@@ -2,6 +2,7 @@ package core.java.reflection;
 
 import java.lang.reflect.Array;
 import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;
@@ -304,4 +305,45 @@ public class ReflectionPractice {
 		}
 	}
 
+	/**
+	 * getFields() - To get public fields
+	 */
+	@Test
+	public void getPublicFields() {
+		Class<ReflectionModel1> klass = ReflectionModel1.class;
+		Field[] fields = klass.getFields();
+		Arrays.stream(fields).forEach(field -> {
+			System.out.println(field.getType() + " " + field.getName());
+		});
+	}
+
+	/**
+	 * getDeclaredFields() - To get public/private fields
+	 */
+	@Test
+	public void getPrivateFields() {
+		Class<ReflectionModel1> klass = ReflectionModel1.class;
+		Field[] fields = klass.getDeclaredFields();
+		Arrays.stream(fields).forEach(field -> {
+			System.out.println(field.getType() + " " + field.getName());
+		});
+	}
+
+	/**
+	 * Set value to public fields. To set private fields, we have to use setter
+	 */
+	@Test
+	public void setPublicFields() {
+		try {
+			Class<ReflectionModel1> klass = ReflectionModel1.class;
+			ReflectionModel1 reflectionModel1 = new ReflectionModel1();
+
+			Field publicField1 = klass.getField("publicField1");
+			publicField1.set(reflectionModel1, "jack");
+
+			System.out.println("reflectionModel1.publicField1: " + reflectionModel1.publicField1);
+		} catch (NoSuchFieldException | SecurityException | IllegalArgumentException | IllegalAccessException e) {
+			e.printStackTrace();
+		}
+	}
 }

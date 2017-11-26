@@ -467,7 +467,6 @@ public class ThreadsPractice {
 	/**
 	 * @see java.util.concurrent.CountDownLatch practice
 	 */
-	@Ignore
 	@Test
 	public void countDownLatch() {
 		// create count down latch with initial value of 3
@@ -497,7 +496,6 @@ public class ThreadsPractice {
 	/**
 	 * @see java.util.concurrent.CountDownLatch practice
 	 */
-	@Ignore
 	@Test
 	public void countDownLatch2() {
 		// create count down latch with initial value of 3
@@ -506,7 +504,7 @@ public class ThreadsPractice {
 		// create thread pool with 3 worked threads
 		ExecutorService executorService = Executors.newFixedThreadPool(3);
 
-		// assign 3 tasks to 3 threads in thread pool
+		// assign 3 tasks to 5 threads in thread pool
 		for (int i = 0; i < 5; i++) {
 			executorService.submit(new CountDownLatchThread("thread" + i, countDownLatch));
 		}
