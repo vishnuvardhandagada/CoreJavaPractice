@@ -411,7 +411,7 @@ public class ListPractice {
 		System.out.println("default sort as per comparable: " + students);
 
 		/*Comparator<Student> idComparator = new Comparator<Student>() {
-
+		
 			@Override
 			public int compare(Student o1, Student o2) {
 				return o1.getId().compareTo(o2.getId());
@@ -427,4 +427,38 @@ public class ListPractice {
 		System.out.println("sort by id: " + students);
 	}
 
+	/**
+	 * Remove elements from list while iteration
+	 */
+	@Test
+	public void removeelementsFromList() {
+		List<String> list = new ArrayList<>();
+		list.add("a");
+		list.add("b");
+		list.add("c");
+
+		// No Exception but not all elements will be removed - we will get unpredicted behavior
+		System.out.println(list);
+		for (int i = 0; i < list.size(); i++) {
+			list.remove(i);
+		}
+		System.out.println(list);
+
+		// ConcurrentModificationException
+		/*System.out.println(list);
+		for (String str : list) {
+			list.remove(str);
+		}
+		System.out.println(list);*/
+
+		// No Exception
+		/*System.out.println(list);
+		Iterator<String> iterator = list.iterator();
+		while (iterator.hasNext()) {
+			iterator.next();
+			iterator.remove();
+		}
+		System.out.println(list);*/
+
+	}
 }
