@@ -151,8 +151,8 @@ public class FileIOPractice {
 
 		// from java 7 
 		try (InputStream inputStream3 = getClass().getClassLoader().getResourceAsStream("file1.txt")) {
-			System.out.println("inputStream3: " + inputStream3 + ", number of bytes:"
-					+ inputStream3.available());
+			System.out.println(
+					"inputStream3: " + inputStream3 + ", number of bytes:" + inputStream3.available());
 		}
 	}
 
@@ -163,8 +163,8 @@ public class FileIOPractice {
 	 */
 	@Test
 	public void readContentsOfFile() throws FileNotFoundException, IOException {
-		System.out
-				.println("-------------method 1 using java.io.BufferedReader with relative path--------------------------");
+		System.out.println(
+				"-------------method 1 using java.io.BufferedReader with relative path--------------------------");
 		URL url = getClass().getClassLoader().getResource("file1.txt");
 		File file = new File(url.getPath());
 		System.out.println("readContentsOfFile() -> file.getAbsolutePath(): " + file.getAbsolutePath());
@@ -175,8 +175,8 @@ public class FileIOPractice {
 			}
 		}
 
-		System.out
-				.println("----------------method 2 java.io.BufferedReader with absolute path-----------------------");
+		System.out.println(
+				"----------------method 2 java.io.BufferedReader with absolute path-----------------------");
 		try (BufferedReader bufferedReader = new BufferedReader(new FileReader(
 				"E:\\Backup\\JavaPrep\\practiceProjects\\CoreJavaPractice\\src\\main\\resources\\file1.txt"))) {
 			String line = "";
@@ -348,7 +348,8 @@ public class FileIOPractice {
 			// getting specific file in zip file
 			ZipEntry file1Entry = zipFile.getEntry("my-zip-file/file1.txt");
 			InputStream file1InputStream = zipFile.getInputStream(file1Entry);
-			try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(file1InputStream));) {
+			try (BufferedReader bufferedReader = new BufferedReader(
+					new InputStreamReader(file1InputStream));) {
 				StringBuffer content = new StringBuffer();
 				String line;
 				while ((line = bufferedReader.readLine()) != null) {
@@ -362,7 +363,8 @@ public class FileIOPractice {
 			// getting specific file in sub-folder in zip file
 			ZipEntry file4Entry = zipFile.getEntry("my-zip-file/sub-folder/file4.txt");
 			InputStream file4InputStream = zipFile.getInputStream(file4Entry);
-			try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(file4InputStream));) {
+			try (BufferedReader bufferedReader = new BufferedReader(
+					new InputStreamReader(file4InputStream));) {
 				StringBuffer content = new StringBuffer();
 				String line;
 				while ((line = bufferedReader.readLine()) != null) {
@@ -470,27 +472,26 @@ public class FileIOPractice {
 	public void getCurrentProjectDirectory() {
 		// method 1
 		String projectDirectory1 = System.getProperty("user.dir");
-		System.out.println("FileIOPractice -> getCurrentDirectory() -> projectDirectory1: "
-				+ projectDirectory1);
+		System.out.println(
+				"FileIOPractice -> getCurrentDirectory() -> projectDirectory1: " + projectDirectory1);
 
 		// method 2
 		String projectDirectory2 = Paths.get("").toAbsolutePath().toString();
-		System.out.println("FileIOPractice -> getCurrentDirectory() -> projectDirectory2: "
-				+ projectDirectory2);
+		System.out.println(
+				"FileIOPractice -> getCurrentDirectory() -> projectDirectory2: " + projectDirectory2);
 
 		// method 3
 		String projectDirectory3 = Paths.get(".").toAbsolutePath().normalize().toString();
-		System.out.println("FileIOPractice -> getCurrentDirectory() -> projectDirectory3: "
-				+ projectDirectory3);
+		System.out.println(
+				"FileIOPractice -> getCurrentDirectory() -> projectDirectory3: " + projectDirectory3);
 
 		// method 4
 		URL projectDirectory4 = getClass().getProtectionDomain().getCodeSource().getLocation();
-		System.out.println("FileIOPractice -> getCurrentDirectory() -> projectDirectory4: "
-				+ projectDirectory4);
+		System.out.println(
+				"FileIOPractice -> getCurrentDirectory() -> projectDirectory4: " + projectDirectory4);
 
 		// method 5
-		String myCurrentDir = System.getProperty("user.dir")
-				+ File.separator
+		String myCurrentDir = System.getProperty("user.dir") + File.separator
 				+ System.getProperty("sun.java.command")
 						.substring(0, System.getProperty("sun.java.command").lastIndexOf("."))
 						.replace(".", File.separator);
@@ -516,7 +517,29 @@ public class FileIOPractice {
 	 */
 	@Test
 	public void lineSeparator() {
-		String lineSeparator = System.getProperty("line.separator");
-		System.out.println(new String(lineSeparator));
+		String lineSeparator = System.getProperty("line.separator").toString();
+		System.out.println("abc" + lineSeparator + "def");
+
+		String lineSeparator2 = File.separator;
+		System.out.println("lineSeperator2: " + lineSeparator2);
+	}
+
+	@Test
+	public void createDirectory() {
+		boolean isTestFolderCreated = new File("E:\\Backup\\testFolder").mkdir();
+		System.out.println("isTestFolderCreated: " + isTestFolderCreated);
+
+		boolean isFolderStructureCreated = new File("E:\\Backup\\folder1\\folder2").mkdirs();
+		System.out.println("isFolderStructureCreated: " + isFolderStructureCreated);
+
+		// from JDK 7 - using java.nio.file package
+		try {
+			Path path = Paths.get("E:\\Backup\\folder3\\folder4");
+			System.out.println("Files.exists(path) : " + Files.exists(path));
+			Files.createDirectories(path);
+			System.out.println("Files.exists(path) : " + Files.exists(path));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 }
