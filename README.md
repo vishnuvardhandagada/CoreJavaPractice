@@ -57,3 +57,9 @@
 
 **core.java.generics**
 - GenericsPractice
+
+**core.java.i18n**
+- LocalPractice
+- ResourceBundlePractice
+- NumberFormatPractice
+- DecimalFormatPractice
