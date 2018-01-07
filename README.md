@@ -63,3 +63,6 @@
 - ResourceBundlePractice
 - NumberFormatPractice
 - DecimalFormatPractice
+
+**core.java.regex**
+- RegexPractice
