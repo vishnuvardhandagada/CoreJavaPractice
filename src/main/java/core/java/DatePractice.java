@@ -716,7 +716,6 @@ public class DatePractice {
 		System.out.println("JDK8: outputDate: " + outputDate2);
 	}
 
-	// from here to Cerebro
 	@Test
 	public void formatDateBasedOnLocale() {
 		DateFormat denmarkDateFormat = DateFormat.getDateInstance(DateFormat.DEFAULT, new Locale("da", "DK"));
