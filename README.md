@@ -36,6 +36,21 @@
 **core.java.immutable.singleton**
 - SingletonPractice
 
+**core.java.reflection**
+- ReflectionPractice
+
+**core.java.generics**
+- GenericsPractice
+
+**core.java.i18n**
+- LocalPractice
+- ResourceBundlePractice
+- NumberFormatPractice
+- DecimalFormatPractice
+
+**core.java.regex**
+- RegexPractice
+
 ## Java 8 Examples
 
 **core.java.java8.base64**
@@ -51,18 +66,3 @@
 
 **core.java.java8.date.time**
 - DateTimePractice
-
-**core.java.reflection**
-- ReflectionPractice
-
-**core.java.generics**
-- GenericsPractice
-
-**core.java.i18n**
-- LocalPractice
-- ResourceBundlePractice
-- NumberFormatPractice
-- DecimalFormatPractice
-
-**core.java.regex**
-- RegexPractice
