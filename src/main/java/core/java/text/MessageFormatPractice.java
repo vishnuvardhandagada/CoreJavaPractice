@@ -11,7 +11,7 @@ public class MessageFormatPractice {
 	public void method1() {
 		String message = "Time is: {0, time},  Date is: {0, date} , Number is {1}";
 		MessageFormat messageFormat = new MessageFormat(message);
-		String formattedMessage = messageFormat.format(new Object[] { new Date(), 10 });
+		String formattedMessage = messageFormat.format(new Object[] { new Date(), String.valueOf(2015) });
 		System.out.println("MessageFormatPractice -> method1() -> formattedMessage: " + formattedMessage);
 	}
 }

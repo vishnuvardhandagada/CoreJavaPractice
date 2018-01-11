@@ -217,4 +217,5 @@ public class MapPractice {
 		Collection<String> values = map.values();
 		System.out.println("values: " + values);
 	}
+
 }
